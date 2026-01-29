@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - TutorConnect</title>
+    <!-- Updated CSS path to work with local server -->
+    <link rel="stylesheet" href="./css/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <!-- Updated header with professional logo -->
+            <div class="auth-header">
+                <svg class="logo-svg-auth" viewBox="0 0 40 40" width="50" height="50">
+                    <rect width="40" height="40" rx="8" fill="#5b5bff"/>
+                    <text x="20" y="26" font-size="24" font-weight="bold" fill="white" text-anchor="middle">TC</text>
+                </svg>
+                <h1>TutorConnect</h1>
+                <p>Create Your Account</p>
+            </div>
+
+            <!-- Enhanced role selector with icons and descriptions -->
+            <div class="role-selector">
+                <button class="role-btn active" data-role="student">
+                    <span class="role-icon">👨‍🎓</span>
+                    <span class="role-name">Student</span>
+                    <span class="role-desc">Find tutors</span>
+                </button>
+                <button class="role-btn" data-role="teacher">
+                    <span class="role-icon">👨‍🏫</span>
+                    <span class="role-name">Teacher</span>
+                    <span class="role-desc">Teach & Earn</span>
+                </button>
+            </div>
+
+            <form id="signupForm" class="auth-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullname" required placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" required placeholder="you@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="location" required placeholder="City, State">
+                </div>
+
+                <!-- Added conditional fields for students -->
+                <div id="studentFields" class="role-fields">
+                    <div class="form-group">
+                        <label>Subjects You Need Help With</label>
+                        <select id="subjects" multiple>
+                            <option value="math">Mathematics</option>
+                            <option value="english">English</option>
+                            <option value="science">Science</option>
+                            <option value="history">History</option>
+                            <option value="coding">Coding</option>
+                            <option value="physics">Physics</option>
+                            <option value="chemistry">Chemistry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Budget Range (per hour)</label>
+                        <select id="budget">
+                            <option value="">Select budget range</option>
+                            <option value="low">Under $20</option>
+                            <option value="medium">$20 - $50</option>
+                            <option value="high">$50 - $100</option>
+                            <option value="premium">$100+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Added conditional fields for teachers -->
+                <div id="teacherFields" class="role-fields" style="display:none;">
+                    <div class="form-group">
+                        <label>Subjects You Teach</label>
+                        <input type="text" id="subjects-teach" placeholder="e.g., Mathematics, Physics">
+                    </div>
+                    <div class="form-group">
+                        <label>Hourly Rate (USD)</label>
+                        <input type="number" id="hourly-rate" placeholder="e.g., 50" min="5" max="500">
+                    </div>
+                    <div class="form-group">
+                        <label>Years of Experience</label>
+                        <input type="number" id="experience" placeholder="e.g., 5" min="0" max="60">
+                    </div>
+                </div>
+
+                <div class="form-checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+            </form>
+
+            <p class="auth-footer">
+                Already have an account? <a href="login.html">Sign in here</a>
+            </p>
+        </div>
+
+        <!-- Enhanced side content with benefits and stats -->
+        <div class="auth-side">
+            <div class="auth-side-content">
+                <h2>Join Thousands of Learners</h2>
+                <p>Start your learning journey with TutorConnect today.</p>
+                
+                <div class="auth-benefits">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🎯</span>
+                        <p>AI-matched tutors</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">💰</span>
+                        <p>Secure payments</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">💬</span>
+                        <p>Built-in chat</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">⭐</span>
+                        <p>Verified tutors</p>
+                    </div>
+                </div>
+
+                <div class="auth-stats">
+                    <div class="stat">
+                        <h3>10K+</h3>
+                        <p>Active Tutors</p>
+                    </div>
+                    <div class="stat">
+                        <h3>50K+</h3>
+                        <p>Happy Students</p>
+                    </div>
+                    <div class="stat">
+                        <h3>4.8</h3>
+                        <p>Rating</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

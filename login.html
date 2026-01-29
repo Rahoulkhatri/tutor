@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TutorConnect</title>
+    <!-- Updated CSS path to work with local server -->
+    <link rel="stylesheet" href="./css/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <!-- Updated header with professional logo -->
+            <div class="auth-header">
+                <svg class="logo-svg-auth" viewBox="0 0 40 40" width="50" height="50">
+                    <rect width="40" height="40" rx="8" fill="#5b5bff"/>
+                    <text x="20" y="26" font-size="24" font-weight="bold" fill="white" text-anchor="middle">TC</text>
+                </svg>
+                <h1>TutorConnect</h1>
+                <p>Sign In to Your Account</p>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" required placeholder="you@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+
+                <div class="form-remember">
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+            </form>
+
+            <!-- Added divider for social login -->
+            <div class="auth-divider">or continue with</div>
+
+            <div class="social-buttons">
+                <button type="button" class="btn-social google-btn">
+                    <span class="social-icon">G</span>
+                    <span class="social-text">Google</span>
+                </button>
+                <button type="button" class="btn-social facebook-btn">
+                    <span class="social-icon">f</span>
+                    <span class="social-text">Facebook</span>
+                </button>
+            </div>
+
+            <p class="auth-footer">
+                Don't have an account? <a href="signup.html">Sign up here</a>
+            </p>
+        </div>
+
+        <div class="auth-side">
+            <div class="auth-side-content">
+                <h2>Welcome Back!</h2>
+                <p>Access your dashboard to manage your profile, matches, and payments.</p>
+                <div class="auth-benefits">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <p>AI-powered matching</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <p>Secure payments</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <p>Built-in chat</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <p>24/7 Support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

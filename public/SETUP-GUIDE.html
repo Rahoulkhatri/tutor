@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TutorConnect - Setup Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #5b5bff;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        h2 {
+            color: #5b5bff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #5b5bff;
+            padding-bottom: 10px;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #5b5bff;
+            border-radius: 4px;
+        }
+        .step strong {
+            color: #5b5bff;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .step ol {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        .step li {
+            margin-bottom: 8px;
+        }
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #856404;
+        }
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #155724;
+        }
+        .file-structure {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+        .pages-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .page-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #5b5bff;
+        }
+        .page-card strong {
+            display: block;
+            color: #5b5bff;
+            margin-bottom: 5px;
+        }
+        .page-card a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .page-card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TutorConnect Platform</h1>
+        <p class="subtitle">Complete Setup Guide for HTML, CSS & JavaScript Version</p>
+
+        <h2>Problem Solved</h2>
+        <div class="success">
+            <strong>✓ CSS Loading Issue Fixed!</strong> All HTML files have been updated with the correct CSS file paths using relative URLs (./css/filename.css). This ensures CSS loads properly on your local server.
+        </div>
+
+        <h2>How to Run the Application</h2>
+        
+        <div class="step">
+            <strong>Step 1: Download All Files</strong>
+            <ol>
+                <li>Download all files from v0 (click three dots → Download ZIP)</li>
+                <li>Extract the ZIP file to a folder on your computer</li>
+                <li>Folder structure should look like:
+                    <div class="file-structure">
+tutorconnect-platform/
+├── index.html
+├── login.html
+├── signup.html
+├── student-dashboard.html
+├── search-tutors.html
+├── teacher-dashboard.html
+├── chat.html
+├── payments.html
+├── admin-commissions.html
+├── css/
+│   ├── style.css
+│   ├── auth.css
+│   ├── dashboard.css
+│   ├── search.css
+│   ├── chat.css
+│   ├── payments.css
+│   ├── teacher-dashboard.css
+│   └── admin-commissions.css
+├── js/
+│   ├── main.js
+│   ├── auth.js
+│   ├── dashboard.js
+│   ├── search.js
+│   ├── chat.js
+│   ├── payments.js
+│   └── teacher-dashboard.js
+└── SETUP-GUIDE.html
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <strong>Step 2: Choose Your Setup Method</strong>
+            <p>Pick one of the methods below to run your application:</p>
+        </div>
+
+        <h2>Method 1: Using Python (Recommended for Windows)</h2>
+        <div class="step">
+            <ol>
+                <li>Open Command Prompt or PowerShell in your project folder</li>
+                <li>Check Python version: <span class="code-block">python --version</span></li>
+                <li>Run one of these commands:
+                    <div class="code-block">
+# Python 3.9+
+python -m http.server 8000
+
+# Python 3.8 and earlier
+python -m SimpleHTTPServer 8000
+                    </div>
+                </li>
+                <li>Open your browser and go to: <span class="code-block">http://localhost:8000</span></li>
+            </ol>
+        </div>
+
+        <h2>Method 2: Using Node.js</h2>
+        <div class="step">
+            <ol>
+                <li>Install Node.js from https://nodejs.org/ (if not already installed)</li>
+                <li>Open terminal in your project folder</li>
+                <li>Install http-server globally:
+                    <div class="code-block">npm install -g http-server</div>
+                </li>
+                <li>Run the server:
+                    <div class="code-block">http-server -p 8000</div>
+                </li>
+                <li>Open browser and go to: <span class="code-block">http://localhost:8000</span></li>
+            </ol>
+        </div>
+
+        <h2>Method 3: Using VS Code Live Server (Easiest)</h2>
+        <div class="step">
+            <ol>
+                <li>Install "Live Server" extension in VS Code (search in Extensions tab)</li>
+                <li>Right-click on <strong>index.html</strong> file</li>
+                <li>Select <strong>"Open with Live Server"</strong></li>
+                <li>Your browser will automatically open with the application running</li>
+                <li>Any changes you save will automatically refresh the page</li>
+            </ol>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Important:</strong> Do NOT double-click HTML files directly! You must run them through a local server. Otherwise, CSS and JavaScript won't load properly due to browser security restrictions.
+        </div>
+
+        <h2>Platform Pages</h2>
+        <div class="pages-list">
+            <div class="page-card">
+                <strong>📱 Landing Page</strong>
+                <a href="/index.html" target="_blank">index.html</a>
+                <p style="margin-top: 8px; font-size: 0.9em;">Homepage with features & pricing</p>
+            </div>
+            <div class="page-card">
+                <strong>🔐 Login</strong>
+                <a href="login.html" target="_blank">login.html</a>
+                <p style="margin-top: 8px; font-size: 0.9em;">User sign in page</p>
+            </div>
+            <div class="page-card">
+                <strong>📝 Sign Up</strong>
+                <a href="/signup.html" target="_blank">signup.html</a>
+                <p style="margin-top: 8px; font-size: 0.9em;">New user registration</p>
+            </div>
+            <div class="page-card">
+                <strong>👨‍🎓 Student Dashboard</strong>
+                <a href="/student-dashboard.html" target="_blank">student-dashboard.html</a>
+                <p style="margin-top: 8px; font-size: 0.9em;">Student main interface</p>
+            </div>
+            <div class="page-card">
+                <strong>🔍 Search Tutors</strong>
+                <a href="/search-tutors.html" target="_blank">search-tutors.html</a>
+                <p style="margin-top: 8px; font-size: 0.9em;">Browse & find tutors</p>
+            </div>
+            <div class="page-card">
+                <strong>👨‍🏫 Teacher Dashboard</strong>
+                <a href="/teacher-dashboard.html" target="_blank">teacher-dashboard.html</a>
+                <p style="margin-top: 8px; font-size: 0.9em;">Teacher main interface</p>
+            </div>
+            <div class="page-card">
+                <strong>💬 Chat System</strong>
+                <a href="/chat.html" target="_blank">chat.html</a>
+                <p style="margin-top: 8px; font-size: 0.9em;">Messaging interface</p>
+            </div>
+            <div class="page-card">
+                <strong>💳 Payments</strong>
+                <a href="/payments.html" target="_blank">payments.html</a>
+                <p style="margin-top: 8px; font-size: 0.9em;">Earnings & transactions</p>
+            </div>
+            <div class="page-card">
+                <strong>📊 Admin Dashboard</strong>
+                <a href="/" target="_blank">Admin Dashboard</a>
+                <p style="margin-top: 8px; font-size: 0.9em;">Integrated in main app</p>
+            </div>
+            <div class="page-card">
+                <strong>💰 Commissions</strong>
+                <a href="/admin-commissions.html" target="_blank">admin-commissions.html</a>
+                <p style="margin-top: 8px; font-size: 0.9em;">Commission management</p>
+            </div>
+        </div>
+
+        <h2>Troubleshooting</h2>
+        <div class="step">
+            <strong>Issue: CSS not loading</strong>
+            <p>✓ Solution: Make sure you're running through a local server (http://localhost), not by double-clicking the HTML file</p>
+        </div>
+        <div class="step">
+            <strong>Issue: JavaScript errors in console</strong>
+            <p>✓ Solution: Open browser DevTools (F12), check the Console tab for error messages</p>
+        </div>
+        <div class="step">
+            <strong>Issue: Port 8000 already in use</strong>
+            <p>✓ Solution: Use a different port number: <span class="code-block">python -m http.server 3000</span></p>
+        </div>
+
+        <h2>Features Included</h2>
+        <div class="success">
+            ✓ AI-Powered Matching System<br>
+            ✓ Student & Teacher Profiles<br>
+            ✓ Real-time Chat Interface<br>
+            ✓ Payment & Earnings Tracking<br>
+            ✓ Area-Based Commission System<br>
+            ✓ Admin Dashboard with Analytics<br>
+            ✓ Pakistani Student Names & Karachi Areas<br>
+            ✓ Responsive Design for All Devices<br>
+        </div>
+
+        <h2>Need Help?</h2>
+        <div class="step">
+            <p>If you encounter any issues:</p>
+            <ol>
+                <li>Check that your folder structure matches the layout above</li>
+                <li>Ensure you're using a local server to run the application</li>
+                <li>Clear your browser cache (Ctrl+Shift+Delete) if CSS still doesn't load</li>
+                <li>Check the browser console for any error messages</li>
+            </ol>
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 2px solid #eee;">
+        <p style="text-align: center; color: #666; margin-top: 30px;">
+            <strong>TutorConnect Platform</strong> - AI-Powered Tutoring Platform<br>
+            Built with HTML, CSS & JavaScript<br>
+            <em>Last Updated: December 2024</em>
+        </p>
+    </div>
+</body>
+</html>

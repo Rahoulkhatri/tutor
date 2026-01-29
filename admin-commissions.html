@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commission Management - TutorConnect Admin</title>
+    <link rel="stylesheet" href="./css/admin-commissions.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">📚 TutorConnect</div>
+            <ul class="sidebar-menu">
+                <li><a href="admin-dashboard.html">📊 Dashboard</a></li>
+                <li><a href="#">👥 Users</a></li>
+                <li><a href="#">💳 Payments</a></li>
+                <li><a href="#" class="active">💰 Commissions</a></li>
+                <li><a href="#">📊 Analytics</a></li>
+                <li><a href="#">⚙️ Settings</a></li>
+                <li><a href="index.html">🚪 Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="page-header">
+                <h1>Commission Management</h1>
+                <p>Manage area-based commission rates and view commission statistics</p>
+            </div>
+
+            <!-- Commission Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Commission (This Month)</h3>
+                    <div class="stat-value">Rs. 498,000</div>
+                    <p>From all areas</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Commission Rate</h3>
+                    <div class="stat-value">7.5%</div>
+                    <p>Across all areas</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Transactions</h3>
+                    <div class="stat-value">2,847</div>
+                    <p>This month</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Refunds Processed</h3>
+                    <div class="stat-value">Rs. 14,300</div>
+                    <p>Early termination refunds</p>
+                </div>
+            </div>
+
+            <!-- Area Commission Configuration -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Area-Based Commission Rates</h2>
+                    <button class="btn-primary" onclick="addNewArea()">+ Add New Area</button>
+                </div>
+
+                <div class="commission-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Area</th>
+                                <th>Teachers</th>
+                                <th>Students</th>
+                                <th>Commission Rate</th>
+                                <th>Monthly Revenue</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>📍 Gulshan-e-Iqbal, Karachi</td>
+                                <td>512</td>
+                                <td>687</td>
+                                <td class="editable-rate">
+                                    <span class="rate-value">8%</span>
+                                    <input type="hidden" class="rate-input" value="8">
+                                </td>
+                                <td>Rs. 498,000</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td class="actions">
+                                    <button class="btn-edit" onclick="editRate(this)">Edit</button>
+                                    <button class="btn-delete" onclick="deleteArea()">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>📍 Defence, Karachi</td>
+                                <td>380</td>
+                                <td>452</td>
+                                <td class="editable-rate">
+                                    <span class="rate-value">7%</span>
+                                    <input type="hidden" class="rate-input" value="7">
+                                </td>
+                                <td>Rs. 356,800</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td class="actions">
+                                    <button class="btn-edit" onclick="editRate(this)">Edit</button>
+                                    <button class="btn-delete" onclick="deleteArea()">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>📍 Clifton, Karachi</td>
+                                <td>206</td>
+                                <td>312</td>
+                                <td class="editable-rate">
+                                    <span class="rate-value">5%</span>
+                                    <input type="hidden" class="rate-input" value="5">
+                                </td>
+                                <td>Rs. 124,800</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td class="actions">
+                                    <button class="btn-edit" onclick="editRate(this)">Edit</button>
+                                    <button class="btn-delete" onclick="deleteArea()">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>📍 Boat Basin, Karachi</td>
+                                <td>94</td>
+                                <td>213</td>
+                                <td class="editable-rate">
+                                    <span class="rate-value">10%</span>
+                                    <input type="hidden" class="rate-input" value="10">
+                                </td>
+                                <td>Rs. 181,600</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td class="actions">
+                                    <button class="btn-edit" onclick="editRate(this)">Edit</button>
+                                    <button class="btn-delete" onclick="deleteArea()">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Refund Requests -->
+            <div class="section">
+                <h2>Pending Refund Requests</h2>
+                <div class="refunds-list">
+                    <div class="refund-item">
+                        <div class="refund-header">
+                            <h3>Early Termination - Ayesha Malik (Student)</h3>
+                            <span class="amount">Rs. 6,000</span>
+                        </div>
+                        <div class="refund-details">
+                            <p><strong>Reason:</strong> Found other tutor, taught 15 days of 30-day contract</p>
+                            <p><strong>Teacher:</strong> Fatima Khan | <strong>Area:</strong> Gulshan-e-Iqbal, Karachi</p>
+                            <p><strong>Calculation:</strong> 50% refund (Rs. 12,000 base) - 5% fee = Rs. 5,700</p>
+                        </div>
+                        <div class="refund-actions">
+                            <button class="btn-approve" onclick="approveRefund()">✓ Approve</button>
+                            <button class="btn-reject" onclick="rejectRefund()">✗ Reject</button>
+                            <button class="btn-view" onclick="viewDetails()">View</button>
+                        </div>
+                    </div>
+
+                    <div class="refund-item">
+                        <div class="refund-header">
+                            <h3>Early Termination - Hassan Ahmed (Teacher)</h3>
+                            <span class="amount">Rs. 8,000</span>
+                        </div>
+                        <div class="refund-details">
+                            <p><strong>Reason:</strong> Personal emergency, taught 10 days</p>
+                            <p><strong>Student:</strong> Nida Khan | <strong>Area:</strong> Defence, Karachi</p>
+                            <p><strong>Calculation:</strong> 33% refund (Rs. 24,000 base) - 5% fee = Rs. 7,600</p>
+                        </div>
+                        <div class="refund-actions">
+                            <button class="btn-approve" onclick="approveRefund()">✓ Approve</button>
+                            <button class="btn-reject" onclick="rejectRefund()">✗ Reject</button>
+                            <button class="btn-view" onclick="viewDetails()">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commission History -->
+            <div class="section">
+                <h2>Commission Transaction History</h2>
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Area</th>
+                            <th>Transaction</th>
+                            <th>Amount</th>
+                            <th>Commission Rate</th>
+                            <th>Commission</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dec 15, 2024</td>
+                            <td>Gulshan-e-Iqbal, Karachi</td>
+                            <td>Ayesha Malik → Fatima Khan (1 hour)</td>
+                            <td>Rs. 2,000</td>
+                            <td>8%</td>
+                            <td>Rs. 160</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Dec 15, 2024</td>
+                            <td>Defence, Karachi</td>
+                            <td>Nida Khan → Hassan Ahmed (1.5 hours)</td>
+                            <td>Rs. 3,300</td>
+                            <td>7%</td>
+                            <td>Rs. 231</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Dec 14, 2024</td>
+                            <td>Clifton, Karachi</td>
+                            <td>Saira Ahmed → Zainab Ali (1 hour)</td>
+                            <td>Rs. 1,800</td>
+                            <td>5%</td>
+                            <td>Rs. 90</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Dec 14, 2024</td>
+                            <td>Boat Basin, Karachi</td>
+                            <td>Usman Mirza → New Tutor (2 hours)</td>
+                            <td>Rs. 4,800</td>
+                            <td>10%</td>
+                            <td>Rs. 480</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-commissions.js"></script>
+</body>
+</html>

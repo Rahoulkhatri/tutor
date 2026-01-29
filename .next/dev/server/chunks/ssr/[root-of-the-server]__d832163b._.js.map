@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Rahoul%20Khatri/Downloads/Code%20TeachLink/app/%28admin%29/payouts/page.tsx"],"sourcesContent":["export default function PayoutsPage() {\n  return (\n    <main className=\"p-6 space-y-6\">\n      <h1 className=\"text-3xl font-bold text-foreground\">Payouts</h1>\n      <p className=\"text-muted-foreground\">Manage teacher payouts and disbursements.</p>\n    </main>\n  );\n}\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,8OAAC;QAAK,WAAU;;0BACd,8OAAC;gBAAG,WAAU;0BAAqC;;;;;;0BACnD,8OAAC;gBAAE,WAAU;0BAAwB;;;;;;;;;;;;AAG3C"}}]
+}

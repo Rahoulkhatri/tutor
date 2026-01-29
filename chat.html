@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - TutorConnect</title>
+    <!-- Updated CSS path to work with local server -->
+    <link rel="stylesheet" href="./css/chat.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar - Conversations -->
+        <div class="chat-sidebar">
+            <div class="chat-header">
+                <h2>Messages</h2>
+                <button class="new-chat">+</button>
+            </div>
+            <div class="conversations-list">
+                <div class="conversation active" onclick="selectConversation(this)">
+                    <div class="conversation-avatar">FK</div>
+                    <div class="conversation-info">
+                        <h3>Fatima Khan</h3>
+                        <p>Thanks for confirming! See you tomorrow...</p>
+                    </div>
+                    <span class="time">2 min</span>
+                </div>
+                <div class="conversation" onclick="selectConversation(this)">
+                    <div class="conversation-avatar">HA</div>
+                    <div class="conversation-info">
+                        <h3>Hassan Ahmed</h3>
+                        <p>The homework is ready for next week</p>
+                    </div>
+                    <span class="time">1 hour</span>
+                </div>
+                <div class="conversation" onclick="selectConversation(this)">
+                    <div class="conversation-avatar">ZA</div>
+                    <div class="conversation-info">
+                        <h3>Zainab Ali</h3>
+                        <p>Great progress on your essays!</p>
+                    </div>
+                    <span class="time">5 hours</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="chat-main">
+            <div class="chat-header-main">
+                <div class="chat-contact">
+                    <div class="avatar">FK</div>
+                    <div>
+                        <!-- Updated to Pakistani tutor names -->
+                        <h3>Fatima Khan</h3>
+                        <p>Online • Mathematics Expert</p>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button>📞</button>
+                    <button>📹</button>
+                    <button>ℹ️</button>
+                </div>
+            </div>
+
+            <div class="messages-area">
+                <div class="message received">
+                    <p>Hi! Ready for tomorrow's lesson?</p>
+                    <span>10:30 AM</span>
+                </div>
+                <div class="message sent">
+                    <p>Yes! I've prepared the homework</p>
+                    <span>10:35 AM</span>
+                </div>
+                <div class="message received">
+                    <p>Perfect! We'll start with calculus review</p>
+                    <span>10:36 AM</span>
+                </div>
+                <div class="message received">
+                    <p>Thanks for confirming! See you tomorrow at 3 PM</p>
+                    <span>10:40 AM</span>
+                </div>
+            </div>
+
+            <div class="message-input">
+                <input type="text" placeholder="Type your message...">
+                <button>📎</button>
+                <button>😊</button>
+                <button>📤</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/chat.js"></script>
+</body>
+</html>

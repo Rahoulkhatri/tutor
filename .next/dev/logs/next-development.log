@@ -1,0 +1,119 @@
+[00:00:04.017] Server  LOG      ✓ Ready in 2.7s
+[00:00:21.252] Server  LOG      ○ Compiling / ...
+[00:27:18.339] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:27:18.449] Server  LOG      ✓ Compiled in 88ms
+[00:28:01.295] Server  LOG        Reload env: .env
+[00:28:40.235] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:28:40.239] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[root-of-the-server]__d110193e._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:28:40.402] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\node_modules_7a4f4a95._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:28:40.452] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:28:40.456] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:28:40.458] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:28:40.474] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:28:40.487] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:28:40.497] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:28:40.519] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:28:40.521] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:28:40.539] Server  ERROR    ⨯ Error: Failed to load external module @prisma/client: Error: Cannot find module '.prisma/client/default'
+Require stack:
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\@prisma\client\default.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[root-of-the-server]__d110193e._.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[turbopack]_runtime.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\app\api\auth\me\route.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\require.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\load-components.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\build\utils.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\build\swc\options.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\build\swc\index.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\start-server.js
+[00:28:43.574] Server  LOG      ○ Compiling /_error ...
+[00:30:16.534] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:16.536] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[root-of-the-server]__d110193e._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:16.593] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\node_modules_7a4f4a95._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:16.646] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:16.671] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:16.678] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:16.681] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:16.683] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:16.686] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:16.693] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:16.695] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:16.700] Server  ERROR    ⨯ Error: Failed to load external module @prisma/client: Error: Cannot find module '.prisma/client/default'
+Require stack:
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\@prisma\client\default.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[root-of-the-server]__d110193e._.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[turbopack]_runtime.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\app\api\auth\me\route.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\require.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\load-components.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\build\utils.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\build\swc\options.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\build\swc\index.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\start-server.js
+[00:30:19.895] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:20.052] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[root-of-the-server]__d110193e._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:20.124] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\node_modules_7a4f4a95._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:20.164] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:20.198] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:20.216] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:20.237] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:20.278] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:20.311] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:20.336] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:20.365] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:30:20.381] Server  ERROR    ⨯ Error: Failed to load external module @prisma/client: Error: Cannot find module '.prisma/client/default'
+Require stack:
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\@prisma\client\default.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[root-of-the-server]__d110193e._.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[turbopack]_runtime.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\app\api\auth\me\route.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\require.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\load-components.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\build\utils.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\build\swc\options.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\build\swc\index.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\router-server.js
+- C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\start-server.js
+[00:33:26.931] Server  LOG        Reload env: .env
+[00:35:51.775] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\mongodb\lib\sdam\topology.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:51.787] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\mongodb\lib\mongo_client.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:51.790] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[root-of-the-server]__e4b31fc8._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:51.874] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:51.986] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\node_modules_7a4f4a95._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:52.025] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:52.027] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:52.030] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:52.032] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:52.034] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:52.037] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:52.042] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\mongodb\lib\cmap\connect.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:52.049] Server  ERROR   Login error: MongoServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017
+[00:37:58.899] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\mongodb\lib\sdam\topology.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:58.908] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\mongodb\lib\mongo_client.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:58.923] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\[root-of-the-server]__e4b31fc8._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:58.936] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:59.027] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\.next\dev\server\chunks\node_modules_7a4f4a95._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:59.032] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:59.034] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:59.035] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:59.036] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:59.037] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:59.038] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:59.039] Server  ERROR   C:\Users\Rahoul Khatri\Downloads\Code TeachLink\node_modules\mongodb\lib\cmap\connect.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:59.042] Server  ERROR   Login error: MongoServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017
+[00:54:38.545] Server  LOG        Reload env: .env
+[00:54:53.843] Server  LOG        Reload env: .env
+[00:54:54.849] Server  LOG        Reload env: .env
+[00:55:01.597] Server  LOG        Reload env: .env
+[00:55:22.519] Server  LOG        Reload env: .env
+[00:55:31.710] Server  LOG        Reload env: .env
+[00:55:36.242] Server  LOG        Reload env: .env
+[00:55:39.093] Server  LOG        Reload env: .env
+[00:55:41.277] Server  LOG        Reload env: .env
+[00:55:48.882] Server  LOG        Reload env: .env
+[00:56:07.609] Server  ERROR   Login error: Error: querySrv ENODATA _mongodb._tcp.tutor-web.koinezo.mongodb.net

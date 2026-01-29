@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - TutorConnect</title>
+    <!-- Updated CSS path to work with local server -->
+    <link rel="stylesheet" href="./css/dashboard.css">
+</head>
+<body>
+    <div class="user-profile">
+        <div class="avatar">AD</div>
+        <span>Ayesha Malik</span>
+    </div>
+
+    <!-- Dashboard Stats -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Active Tutors</h3>
+            <div class="stat-value">3</div>
+            <p>Tutoring sessions this month</p>
+        </div>
+        <div class="stat-card">
+            <h3>Hours Completed</h3>
+            <div class="stat-value">24</div>
+            <p>Total learning hours</p>
+        </div>
+        <div class="stat-card">
+            <h3>Average Rating</h3>
+            <div class="stat-value">4.8⭐</div>
+            <p>Your tutor ratings</p>
+        </div>
+        <div class="stat-card">
+            <h3>Total Spent</h3>
+            <div class="stat-value">Rs. 45,000</div>
+            <p>This month</p>
+        </div>
+    </div>
+
+    <!-- Active Tutors -->
+    <div class="section">
+        <h2>Your Active Tutors</h2>
+        <div class="tutors-grid">
+            <div class="tutor-card">
+                <div class="tutor-header">
+                    <div class="tutor-avatar">FK</div>
+                    <div>
+                        <h3>Fatima Khan</h3>
+                        <p>Mathematics Expert</p>
+                    </div>
+                </div>
+                <div class="tutor-info">
+                    <p>📍 Gulshan-e-Iqbal</p>
+                    <p>💵 Rs. 2,000/hour</p>
+                    <p>⭐ 4.9 (45 reviews)</p>
+                </div>
+                <div class="tutor-actions">
+                    <a href="chat.html" class="btn-small">Message</a>
+                    <a href="#" class="btn-small">Schedule</a>
+                </div>
+            </div>
+
+            <div class="tutor-card">
+                <div class="tutor-header">
+                    <div class="tutor-avatar">HA</div>
+                    <div>
+                        <h3>Hassan Ahmed</h3>
+                        <p>Physics Teacher</p>
+                    </div>
+                </div>
+                <div class="tutor-info">
+                    <p>📍 Defence</p>
+                    <p>💵 Rs. 1,800/hour</p>
+                    <p>⭐ 4.7 (32 reviews)</p>
+                </div>
+                <div class="tutor-actions">
+                    <a href="chat.html" class="btn-small">Message</a>
+                    <a href="#" class="btn-small">Schedule</a>
+                </div>
+            </div>
+
+            <div class="tutor-card">
+                <div class="tutor-header">
+                    <div class="tutor-avatar">ZA</div>
+                    <div>
+                        <h3>Zainab Ali</h3>
+                        <p>English Literature</p>
+                    </div>
+                </div>
+                <div class="tutor-info">
+                    <p>📍 Clifton</p>
+                    <p>💵 Rs. 2,200/hour</p>
+                    <p>⭐ 4.9 (28 reviews)</p>
+                </div>
+                <div class="tutor-actions">
+                    <a href="chat.html" class="btn-small">Message</a>
+                    <a href="#" class="btn-small">Schedule</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upcoming Sessions -->
+    <div class="section">
+        <h2>Upcoming Sessions</h2>
+        <div class="sessions-list">
+            <div class="session-item">
+                <div class="session-time">Today 3:00 PM</div>
+                <div class="session-details">
+                    <p><strong>Mathematics with Fatima Khan</strong></p>
+                    <p>Duration: 1 hour | Status: Confirmed</p>
+                </div>
+                <button class="btn-small">Join</button>
+            </div>
+            <div class="session-item">
+                <div class="session-time">Tomorrow 2:00 PM</div>
+                <div class="session-details">
+                    <p><strong>Physics with Hassan Ahmed</strong></p>
+                    <p>Duration: 1.5 hours | Status: Confirmed</p>
+                </div>
+                <button class="btn-small">Join</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="section">
+        <h2>Quick Actions</h2>
+        <div class="quick-actions">
+            <a href="search-tutors.html" class="action-btn">🔍 Find New Tutors</a>
+            <a href="#" class="action-btn" onclick="alert('Schedule a new session')">📅 Schedule Session</a>
+            <a href="chat.html" class="action-btn">💬 View Messages</a>
+            <a href="#" class="action-btn" onclick="alert('View payment history')">💳 Payments</a>
+        </div>
+    </div>
+</body>
+</html>

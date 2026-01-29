@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments & Earnings - TutorConnect</title>
+    <link rel="stylesheet" href="/css/payments.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">📚 TutorConnect</div>
+            <ul class="sidebar-menu">
+                <li><a href="/student-dashboard.html">📊 Dashboard</a></li>
+                <li><a href="#">👥 My Connections</a></li>
+                <li><a href="/chat.html">💬 Messages</a></li>
+                <li><a href="#" class="active">💳 Payments</a></li>
+                <li><a href="#">👤 Profile</a></li>
+                <li><a href="/index.html">🚪 Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="page-header">
+                <h1>Payments & Earnings</h1>
+                <p>Manage your payments, earnings, and commission details</p>
+            </div>
+
+            <!-- Balance Cards -->
+            <div class="balance-section">
+                <div class="balance-card primary">
+                    <h3>Available Balance</h3>
+                    <div class="balance-amount">Rs. 96,000</div>
+                    <p>Ready to withdraw</p>
+                </div>
+                <div class="balance-card">
+                    <h3>Pending Payments</h3>
+                    <div class="balance-amount">Rs. 50,000</div>
+                    <p>Will be available in 3 days</p>
+                </div>
+                <div class="balance-card">
+                    <h3>This Month's Earnings</h3>
+                    <div class="balance-amount">Rs. 146,000</div>
+                    <p>From 73 hours of tutoring</p>
+                </div>
+                <div class="balance-card">
+                    <h3>Total Earnings</h3>
+                    <div class="balance-amount">Rs. 1,140,000</div>
+                    <p>Since joining TutorConnect</p>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions-section">
+                <button class="action-btn" onclick="withdrawFunds()">💰 Withdraw Funds</button>
+                <button class="action-btn" onclick="viewCommission()">📊 View Commission Details</button>
+                <button class="action-btn" onclick="addPaymentMethod()">💳 Add Payment Method</button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('earnings')">Earnings History</button>
+                <button class="tab-btn" onclick="switchTab('transactions')">Transactions</button>
+                <button class="tab-btn" onclick="switchTab('payouts')">Payouts</button>
+                <button class="tab-btn" onclick="switchTab('commission')">Commission Breakdown</button>
+            </div>
+
+            <!-- Earnings History Tab -->
+            <div id="earnings" class="tab-content active">
+                <div class="section">
+                    <h2>Recent Earnings</h2>
+                    <div class="earnings-list">
+                        <div class="earning-item">
+                            <div class="earning-left">
+                                <div class="avatar">FK</div>
+                                <div>
+                                    <h3>Fatima's Mathematics Session</h3>
+                                    <p>Ayesha Malik - 1 hour @ Rs. 2,000/hour</p>
+                                    <p class="date">Dec 15, 2024</p>
+                                </div>
+                            </div>
+                            <div class="earning-amount">+Rs. 2,000</div>
+                        </div>
+
+                        <div class="earning-item">
+                            <div class="earning-left">
+                                <div class="avatar">HA</div>
+                                <div>
+                                    <h3>Physics Tutoring Session</h3>
+                                    <p>Nida Khan - 1.5 hours @ Rs. 2,200/hour</p>
+                                    <p class="date">Dec 14, 2024</p>
+                                </div>
+                            </div>
+                            <div class="earning-amount">+Rs. 3,300</div>
+                        </div>
+
+                        <div class="earning-item">
+                            <div class="earning-left">
+                                <div class="avatar">ZA</div>
+                                <div>
+                                    <h3>English Literature Class</h3>
+                                    <p>Saira Ahmed - 1 hour @ Rs. 1,800/hour</p>
+                                    <p class="date">Dec 13, 2024</p>
+                                </div>
+                            </div>
+                            <div class="earning-amount">+Rs. 1,800</div>
+                        </div>
+
+                        <div class="earning-item">
+                            <div class="earning-left">
+                                <div class="avatar">UM</div>
+                                <div>
+                                    <h3>Calculus Problem Solving</h3>
+                                    <p>Usman Mirza - 2 hours @ Rs. 2,400/hour</p>
+                                    <p class="date">Dec 12, 2024</p>
+                                </div>
+                            </div>
+                            <div class="earning-amount">+Rs. 4,800</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Tab -->
+            <div id="transactions" class="tab-content">
+                <div class="section">
+                    <h2>All Transactions</h2>
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dec 15, 2024</td>
+                                <td>Earning</td>
+                                <td>Mathematics Session - Ayesha Malik</td>
+                                <td class="amount-positive">+Rs. 2,000</td>
+                                <td><span class="status-badge completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Dec 14, 2024</td>
+                                <td>Earning</td>
+                                <td>Physics Session - Nida Khan</td>
+                                <td class="amount-positive">+Rs. 3,300</td>
+                                <td><span class="status-badge completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Dec 10, 2024</td>
+                                <td>Payout</td>
+                                <td>Bank Transfer - Monthly Payout</td>
+                                <td class="amount-negative">-Rs. 80,000</td>
+                                <td><span class="status-badge completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Dec 5, 2024</td>
+                                <td>Refund</td>
+                                <td>Early Cancellation Refund - 15 days taught</td>
+                                <td class="amount-negative">-Rs. 6,000</td>
+                                <td><span class="status-badge completed">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Payouts Tab -->
+            <div id="payouts" class="tab-content">
+                <div class="section">
+                    <h2>Payout History</h2>
+                    <div class="payouts-list">
+                        <div class="payout-item">
+                            <div class="payout-header">
+                                <h3>November 2024 Payout</h3>
+                                <span class="payout-date">Nov 10, 2024</span>
+                            </div>
+                            <div class="payout-details">
+                                <p>Total Earnings: Rs. 128,000</p>
+                                <p>Commission (8%): -Rs. 10,240</p>
+                                <p>Platform Fee (2%): -Rs. 2,560</p>
+                            </div>
+                            <div class="payout-amount">Rs. 115,200</div>
+                            <p class="payout-status">✓ Transferred to Bank Account</p>
+                        </div>
+
+                        <div class="payout-item">
+                            <div class="payout-header">
+                                <h3>October 2024 Payout</h3>
+                                <span class="payout-date">Oct 10, 2024</span>
+                            </div>
+                            <div class="payout-details">
+                                <p>Total Earnings: Rs. 112,000</p>
+                                <p>Commission (8%): -Rs. 8,960</p>
+                                <p>Platform Fee (2%): -Rs. 2,240</p>
+                            </div>
+                            <div class="payout-amount">Rs. 100,800</div>
+                            <p class="payout-status">✓ Transferred to Bank Account</p>
+                        </div>
+                        
+                        <div class="payout-item">
+                            <div class="payout-header">
+                                <h3>September 2024 Payout</h3>
+                                <span class="payout-date">Sep 10, 2024</span>
+                            </div>
+                            <div class="payout-details">
+                                <p>Total Earnings: Rs. 100,000</p>
+                                <p>Commission (8%): -Rs. 8,000</p>
+                                <p>Platform Fee (2%): -Rs. 2,000</p>
+                            </div>
+                            <div class="payout-amount">Rs. 90,000</div>
+                            <p class="payout-status">✓ Transferred to Bank Account</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commission Tab -->
+            <div id="commission" class="tab-content">
+                <div class="section">
+                    <h2>Commission Breakdown</h2>
+                    <div class="commission-info">
+                        <div class="info-card">
+                            <h3>Your Area Commission Rate</h3>
+                            <div class="commission-rate">8%</div>
+                            <p>Gulshan-e-Iqbal, Karachi - High Demand Area</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>This Month Deduction</h3>
+                            <div class="commission-rate negative">-Rs. 11,680</div>
+                            <p>From Rs. 146,000 total earnings</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>Platform Fee</h3>
+                            <div class="commission-rate">2%</div>
+                            <p>Standard fee for all tutors</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>This Month Platform Fee</h3>
+                            <div class="commission-rate negative">-Rs. 2,920</div>
+                            <p>From Rs. 146,000 total earnings</p>
+                        </div>
+                    </div>
+
+                    <div class="commission-details">
+                        <h3>How Commission Works</h3>
+                        <div class="details-text">
+                            <p><strong>Commission varies by area:</strong></p>
+                            <ul>
+                                <li>Gulshan-e-Iqbal, Karachi: 8% (High demand, many tutors)</li>
+                                <li>Defence, Karachi: 7% (Growing market)</li>
+                                <li>Clifton, Karachi: 5% (Moderate supply)</li>
+                                <li>Boat Basin, Karachi: 10% (Low supply, high demand)</li>
+                            </ul>
+                            <p style="margin-top: 15px;"><strong>Platform Fee:</strong> 2% standard fee applies to all transactions</p>
+                            <p style="margin-top: 15px;"><strong>Payment Refund Policy:</strong></p>
+                            <ul>
+                                <li>Full month completed: Teacher gets 100% of payments</li>
+                                <li>Early quit (student): Refund calculated after 30-day period</li>
+                                <li>Early quit (teacher): Refund calculated prorated</li>
+                                <li>Valid reasons: Both parties get refund minus 5% processing fee</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/payments.js"></script>
+</body>
+</html>

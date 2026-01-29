@@ -1,0 +1,373 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #5b5bff 0%, #9c27b0 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1000px;
+    width: 100%;
+    padding: 20px;
+}
+
+.auth-box {
+    background: white;
+    padding: 50px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-svg-auth {
+    display: block;
+    margin: 0 auto 15px;
+}
+
+.auth-header h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.auth-header p {
+    color: #999;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Enhanced role selector with better styling */
+.role-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.role-btn {
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.role-icon {
+    font-size: 28px;
+}
+
+.role-name {
+    font-size: 15px;
+    color: #333;
+}
+
+.role-desc {
+    font-size: 12px;
+    color: #999;
+    font-weight: 500;
+}
+
+.role-btn:hover {
+    border-color: #5b5bff;
+    background: #f8f9ff;
+}
+
+.role-btn.active {
+    border-color: #5b5bff;
+    background: linear-gradient(135deg, #5b5bff 0%, #7b7bff 100%);
+    color: white;
+}
+
+.role-btn.active .role-name,
+.role-btn.active .role-desc {
+    color: white;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s;
+    background: #f8f9fa;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #5b5bff;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(91, 91, 255, 0.1);
+}
+
+.form-remember {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.form-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.form-checkbox input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin-top: 2px;
+    accent-color: #5b5bff;
+}
+
+.form-checkbox a {
+    color: #5b5bff;
+    text-decoration: none;
+}
+
+.form-checkbox a:hover {
+    text-decoration: underline;
+}
+
+.forgot-password {
+    color: #5b5bff;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: 600;
+}
+
+.forgot-password:hover {
+    color: #4444dd;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.btn {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #5b5bff 0%, #7b7bff 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(91, 91, 255, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(91, 91, 255, 0.4);
+}
+
+.auth-divider {
+    text-align: center;
+    margin: 24px 0;
+    color: #ccc;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Added social buttons styling */
+.social-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.btn-social {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.btn-social:hover {
+    background: #e8e9fa;
+    border-color: #5b5bff;
+    transform: translateY(-2px);
+}
+
+.social-icon {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+.auth-footer a {
+    color: #5b5bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Enhanced side content with benefits and stats -->
+.auth-side {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-side-content {
+    width: 100%;
+}
+
+.auth-side h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.auth-side p {
+    font-size: 16px;
+    opacity: 0.95;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.auth-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.benefit-icon {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.benefit-item p {
+    font-size: 15px;
+    margin: 0;
+}
+
+.auth-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat p {
+    font-size: 13px;
+    opacity: 0.9;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .auth-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .auth-side {
+        display: none;
+    }
+
+    .auth-box {
+        padding: 30px;
+    }
+
+    .auth-header h1 {
+        font-size: 24px;
+    }
+
+    .role-selector {
+        gap: 10px;
+    }
+
+    .role-btn {
+        padding: 12px;
+        font-size: 13px;
+    }
+
+    .social-buttons {
+        grid-template-columns: 1fr;
+    }
+}
