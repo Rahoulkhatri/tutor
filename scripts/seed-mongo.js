@@ -88,10 +88,43 @@ async function main() {
     );
   }
 
-  console.log("MongoDB seed done. Users:");
-  console.log("  admin@tutorconnect.com / admin123 (Admin)");
-  console.log("  student@tutorconnect.com / student123 (Student)");
-  console.log("  teacher@tutorconnect.com / teacher123 (Teacher)");
+  const teacherUser = await users.findOne({ email: "teacher@tutorconnect.com" });
+  const studentUser = await users.findOne({ email: "student@tutorconnect.com" });
+  const teacherId = teacherUser?._id?.toString();
+  const studentId = studentUser?._id?.toString();
+
+  if (teacherId) {
+    const offers = db.collection("teaching_offers");
+    await offers.deleteMany({ userId: teacherId });
+    await offers.insertMany([
+      { userId: teacherId, subject: "Mathematics Tutor", subjectBadge: "High School Math", rate: 2000, location: "Gulshan-e-Iqbal, Karachi", description: "Algebra, geometry, calculus for high school.", status: "active", createdAt: now, updatedAt: now },
+      { userId: teacherId, subject: "Physics Tutor", subjectBadge: "AP Physics", rate: 2200, location: "Defence, Karachi", description: "AP Physics for advanced students.", status: "active", createdAt: now, updatedAt: now },
+      { userId: teacherId, subject: "Test Prep", subjectBadge: "SAT/ACT", rate: 2400, location: "Clifton, Karachi", description: "SAT/ACT preparation.", status: "active", createdAt: now, updatedAt: now },
+    ]);
+  }
+
+  if (studentId && teacherId) {
+    const connections = db.collection("connections");
+    await connections.deleteMany({ $or: [{ studentId }, { teacherId }] });
+    await connections.insertMany([
+      { studentId, teacherId, subject: "Mathematics Expert", location: "Gulshan-e-Iqbal", rate: 2000, rating: "4.9", reviews: 45, status: "active", createdAt: now, updatedAt: now },
+    ]);
+
+    const sessions = db.collection("sessions");
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const today3 = new Date(now);
+    today3.setHours(15, 0, 0, 0);
+    tomorrow.setHours(14, 0, 0, 0);
+    await sessions.deleteMany({ studentId: studentId });
+    await sessions.insertMany([
+      { studentId, teacherId, scheduledAt: today3, durationHours: 1, subject: "Mathematics", status: "confirmed", amount: 2000, createdAt: now },
+      { studentId, teacherId, scheduledAt: tomorrow, durationHours: 1.5, subject: "Physics", status: "confirmed", amount: 3300, createdAt: now },
+    ]);
+  }
+
+  console.log("MongoDB seed done. Users + offers, connections, sessions.");
+  console.log("Note: Sample upcoming sessions are for teacher@tutorconnect.com only. Other teachers (e.g. Rahoul Khatri) will see sessions only after a student schedules with them.");
   await client.close();
 }
 

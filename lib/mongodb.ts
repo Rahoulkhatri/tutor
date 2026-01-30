@@ -37,3 +37,7 @@ export type UserDoc = {
 };
 
 export const USERS_COLLECTION = "users";
+export const TEACHING_OFFERS_COLLECTION = "teaching_offers";
+export const CONNECTIONS_COLLECTION = "connections";
+export const SESSIONS_COLLECTION = "sessions";
+export const MESSAGES_COLLECTION = "messages";

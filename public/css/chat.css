@@ -13,7 +13,12 @@ body {
     display: grid;
     grid-template-columns: 300px 1fr;
     height: 100vh;
+    min-height: 0;
     gap: 0;
+}
+
+.chat-container > * {
+    min-height: 0;
 }
 
 /* Sidebar - Conversations */
@@ -112,14 +117,17 @@ body {
     white-space: nowrap;
 }
 
-/* Main Chat Area */
+/* Main Chat Area - WhatsApp/Instagram style: header top, messages scroll, input fixed bottom */
 .chat-main {
     display: flex;
     flex-direction: column;
     background: white;
+    min-height: 0;
+    height: 100%;
 }
 
 .chat-header-main {
+    flex-shrink: 0;
     padding: 15px;
     border-bottom: 1px solid #ddd;
     display: flex;
@@ -201,14 +209,36 @@ body {
     background: #e0e0e0;
 }
 
-/* Messages Area */
+/* Messages Area - scrolls; messages from top, new at bottom */
 .messages-area {
-    flex: 1;
+    flex: 1 1 0;
+    min-height: 0;
     padding: 20px;
     overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    /* Clean minimal scrollbar – theme color, very thin */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(91, 91, 255, 0.35) transparent;
+}
+
+.messages-area::-webkit-scrollbar {
+    width: 4px;
+}
+
+.messages-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.messages-area::-webkit-scrollbar-thumb {
+    background: rgba(91, 91, 255, 0.3);
+    border-radius: 4px;
+}
+
+.messages-area::-webkit-scrollbar-thumb:hover {
+    background: rgba(91, 91, 255, 0.5);
 }
 
 .message {
@@ -245,12 +275,15 @@ body {
     border-radius: 12px 12px 3px 12px;
 }
 
-/* Message Input */
+/* Message Input - fixed at bottom, never moves */
 .message-input {
+    flex-shrink: 0;
     padding: 15px;
     border-top: 1px solid #ddd;
     display: flex;
+    align-items: center;
     gap: 10px;
+    background: white;
 }
 
 .message-input input {

@@ -12,7 +12,7 @@
         <div class="sidebar">
             <div class="logo">📚 TutorConnect</div>
             <ul class="sidebar-menu">
-                <li><a href="/student-dashboard.html">📊 Dashboard</a></li>
+                <li><a id="nav-dashboard" href="/student-dashboard.html">📊 Dashboard</a></li>
                 <li><a href="#">👥 My Connections</a></li>
                 <li><a href="/chat.html">💬 Messages</a></li>
                 <li><a href="#" class="active">💳 Payments</a></li>
@@ -21,9 +21,8 @@
             </ul>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Header -->
+        <!-- Main Content - TEACHER VIEW (Earnings & Commission) -->
+        <div id="teacher-payments-view" class="main-content" style="display: none;">
             <div class="page-header">
                 <h1>Payments & Earnings</h1>
                 <p>Manage your payments, earnings, and commission details</p>
@@ -269,6 +268,33 @@
                             </ul>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content - STUDENT VIEW (Fees paid to teachers) -->
+        <div id="student-payments-view" class="main-content" style="display: none;">
+            <div class="page-header">
+                <h1>My Payments</h1>
+                <p>Fees paid to teachers for courses and sessions</p>
+            </div>
+            <div class="balance-section">
+                <div class="balance-card primary">
+                    <h3>Total Paid</h3>
+                    <div class="balance-amount" id="student-total-paid">Rs. 0</div>
+                    <p>All time</p>
+                </div>
+                <div class="balance-card">
+                    <h3>This Month</h3>
+                    <div class="balance-amount" id="student-month-paid">Rs. 0</div>
+                    <p>Fees paid this month</p>
+                </div>
+            </div>
+            <div class="section">
+                <h2>Payment History</h2>
+                <p class="section-desc">Payments you made to teachers for course fees and sessions.</p>
+                <div id="student-payments-list" class="earnings-list">
+                    <p class="empty-state">Loading…</p>
                 </div>
             </div>
         </div>

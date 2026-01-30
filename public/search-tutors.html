@@ -4,65 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Tutors - TutorConnect</title>
-    <!-- Updated CSS path to work with local server -->
     <link rel="stylesheet" href="/css/search.css">
 </head>
 <body>
-    <div class="tutor-result">
-        <div class="tutor-image">👨‍🏫</div>
-        <div class="tutor-content">
-            <h3>Fatima Khan</h3>
-            <p class="subject">Mathematics • Physics</p>
-            <p class="location">📍 Gulshan-e-Iqbal, Karachi</p>
-            <div class="tutor-stats">
-                <span>⭐ 4.9 (45 reviews)</span>
-                <span>💵 Rs. 2,000/hour</span>
-                <span>👥 240+ students taught</span>
-            </div>
-            <p class="bio">Expert math tutor with 8 years of experience. Specializing in calculus and algebra for high school students.</p>
-            <div class="tutor-actions">
-                <button class="btn btn-primary" onclick="viewProfile()">View Profile</button>
-                <button class="btn btn-secondary" onclick="sendRequest()">Send Request</button>
-            </div>
-        </div>
+    <div class="container">
+        <!-- Left sidebar -->
+        <aside class="sidebar">
+            <div class="logo">TutorConnect</div>
+            <ul class="sidebar-menu">
+                <li><a href="/student-dashboard.html">Dashboard</a></li>
+                <li><a href="/search-tutors.html" class="active">Search Tutors</a></li>
+                <li><a href="/chat.html">Messages</a></li>
+                <li><a href="/payments.html">Payments</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <section class="search-header">
+                <h1>Find Your Perfect Tutor</h1>
+                <p>Browse real teaching offers from active tutors. Filter by subject, price and location, then send a request or message for questions.</p>
+            </section>
+
+            <!-- Filters -->
+            <section class="filters-section">
+                <div class="filter-group">
+                    <label for="subjectFilter">Subject / Course</label>
+                    <input id="subjectFilter" type="text" placeholder="e.g. Mathematics, Physics, SAT" />
+                </div>
+                <div class="filter-group">
+                    <label for="locationFilter">Location</label>
+                    <input id="locationFilter" type="text" placeholder="e.g. Gulshan, Defence" />
+                </div>
+                <div class="filter-group">
+                    <label for="priceFilter">Max hourly rate (Rs.)</label>
+                    <input id="priceFilter" type="range" min="1000" max="4000" step="200" value="4000" />
+                    <span id="priceValue">Up to Rs. 4,000/hour</span>
+                </div>
+                <div class="filter-group">
+                    <label for="ratingFilter">Minimum rating</label>
+                    <select id="ratingFilter">
+                        <option value="">Any</option>
+                        <option value="4.0">4.0+</option>
+                        <option value="4.5">4.5+</option>
+                    </select>
+                </div>
+                <button class="btn-filter" type="button" onclick="applyFilters()">Apply Filters</button>
+            </section>
+
+            <!-- Dynamic tutor results -->
+            <section class="tutors-list" id="tutors-list">
+                <p>Loading tutors...</p>
+            </section>
+        </main>
     </div>
 
-    <div class="tutor-result">
-        <div class="tutor-image">👩‍🏫</div>
-        <div class="tutor-content">
-            <h3>Zainab Ali</h3>
-            <p class="subject">English • Literature</p>
-            <p class="location">📍 Defence, Karachi</p>
-            <div class="tutor-stats">
-                <span>⭐ 4.8 (38 reviews)</span>
-                <span>💵 Rs. 1,900/hour</span>
-                <span>👥 180+ students taught</span>
-            </div>
-            <p class="bio">Passionate English teacher focused on writing, reading comprehension, and test preparation.</p>
-            <div class="tutor-actions">
-                <button class="btn btn-primary" onclick="viewProfile()">View Profile</button>
-                <button class="btn btn-secondary" onclick="sendRequest()">Send Request</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="tutor-result">
-        <div class="tutor-image">👨‍🏫</div>
-        <div class="tutor-content">
-            <h3>Hassan Ahmed</h3>
-            <p class="subject">Physics • Chemistry</p>
-            <p class="location">📍 Clifton, Karachi</p>
-            <div class="tutor-stats">
-                <span>⭐ 4.9 (52 reviews)</span>
-                <span>💵 Rs. 2,200/hour</span>
-                <span>👥 290+ students taught</span>
-            </div>
-            <p class="bio">Advanced science educator with PhD in Physics. Excellent for STEM students and standardized test prep.</p>
-            <div class="tutor-actions">
-                <button class="btn btn-primary" onclick="viewProfile()">View Profile</button>
-                <button class="btn btn-secondary" onclick="sendRequest()">Send Request</button>
-            </div>
-        </div>
-    </div>
+    <script src="/js/dashboard-auth.js"></script>
+    <script src="/js/search.js"></script>
 </body>
 </html>

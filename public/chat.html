@@ -15,31 +15,8 @@
                 <h2>Messages</h2>
                 <button class="new-chat">+</button>
             </div>
-            <div class="conversations-list">
-                <div class="conversation active" onclick="selectConversation(this)">
-                    <div class="conversation-avatar">FK</div>
-                    <div class="conversation-info">
-                        <h3>Fatima Khan</h3>
-                        <p>Thanks for confirming! See you tomorrow...</p>
-                    </div>
-                    <span class="time">2 min</span>
-                </div>
-                <div class="conversation" onclick="selectConversation(this)">
-                    <div class="conversation-avatar">HA</div>
-                    <div class="conversation-info">
-                        <h3>Hassan Ahmed</h3>
-                        <p>The homework is ready for next week</p>
-                    </div>
-                    <span class="time">1 hour</span>
-                </div>
-                <div class="conversation" onclick="selectConversation(this)">
-                    <div class="conversation-avatar">ZA</div>
-                    <div class="conversation-info">
-                        <h3>Zainab Ali</h3>
-                        <p>Great progress on your essays!</p>
-                    </div>
-                    <span class="time">5 hours</span>
-                </div>
+            <div class="conversations-list" id="conversations-list">
+                <p class="empty-state" id="conversations-empty">Loading…</p>
             </div>
         </div>
 
@@ -48,12 +25,11 @@
             <div class="chat-header-main">
                 <div class="chat-header-left">
                     <a href="#" class="chat-back" onclick="history.back(); return false;" title="Back">← Back</a>
-                    <div class="chat-contact">
-                        <div class="avatar">FK</div>
+                    <div class="chat-contact" id="chat-contact-header">
+                        <div class="avatar" id="chat-header-avatar">—</div>
                         <div>
-                            <!-- Updated to Pakistani tutor names -->
-                            <h3>Fatima Khan</h3>
-                            <p>Online • Mathematics Expert</p>
+                            <h3 id="chat-header-name">Select a conversation</h3>
+                            <p id="chat-header-subtitle">—</p>
                         </div>
                     </div>
                 </div>
@@ -64,30 +40,15 @@
                 </div>
             </div>
 
-            <div class="messages-area">
-                <div class="message received">
-                    <p>Hi! Ready for tomorrow's lesson?</p>
-                    <span>10:30 AM</span>
-                </div>
-                <div class="message sent">
-                    <p>Yes! I've prepared the homework</p>
-                    <span>10:35 AM</span>
-                </div>
-                <div class="message received">
-                    <p>Perfect! We'll start with calculus review</p>
-                    <span>10:36 AM</span>
-                </div>
-                <div class="message received">
-                    <p>Thanks for confirming! See you tomorrow at 3 PM</p>
-                    <span>10:40 AM</span>
-                </div>
+            <div class="messages-area" id="chat-messages-area">
+                <p class="empty-state" id="messages-empty">Select a conversation or open chat from Dashboard (Start Class / Join).</p>
             </div>
 
             <div class="message-input">
-                <input type="text" placeholder="Type your message...">
-                <button>📎</button>
-                <button>😊</button>
-                <button>📤</button>
+                <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off">
+                <button type="button" class="btn-attach" title="Attach file">📎</button>
+                <button type="button" class="btn-emoji" title="Emoji">😊</button>
+                <button type="button" class="btn-send" title="Send">📤</button>
             </div>
         </div>
     </div>

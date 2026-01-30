@@ -51,6 +51,14 @@ module.exports = mod;
 "use strict";
 
 __turbopack_context__.s([
+    "CONNECTIONS_COLLECTION",
+    ()=>CONNECTIONS_COLLECTION,
+    "MESSAGES_COLLECTION",
+    ()=>MESSAGES_COLLECTION,
+    "SESSIONS_COLLECTION",
+    ()=>SESSIONS_COLLECTION,
+    "TEACHING_OFFERS_COLLECTION",
+    ()=>TEACHING_OFFERS_COLLECTION,
     "USERS_COLLECTION",
     ()=>USERS_COLLECTION,
     "connectToDatabase",
@@ -92,6 +100,10 @@ async function getDb() {
     return db;
 }
 const USERS_COLLECTION = "users";
+const TEACHING_OFFERS_COLLECTION = "teaching_offers";
+const CONNECTIONS_COLLECTION = "connections";
+const SESSIONS_COLLECTION = "sessions";
+const MESSAGES_COLLECTION = "messages";
 }),
 "[project]/lib/auth.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
 "use strict";

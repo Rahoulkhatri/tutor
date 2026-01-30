@@ -41,141 +41,95 @@
   </header>
 
     <main class="dashboard-main">
-    <!-- Dashboard Stats -->
+    <!-- Dashboard Stats (real data from API) -->
     <div class="stats-grid">
         <div class="stat-card">
             <h3>Active Students</h3>
-            <div class="stat-value">8</div>
+            <div class="stat-value" id="stat-students">0</div>
             <p>Currently tutoring</p>
         </div>
         <div class="stat-card">
             <h3>This Month Earnings</h3>
-            <!-- Updated currency to Pakistani Rupees -->
-            <div class="stat-value">Rs. 96,000</div>
-            <p>From 48 hours</p>
+            <div class="stat-value" id="stat-earnings">Rs. 0</div>
+            <p>From sessions</p>
         </div>
         <div class="stat-card">
             <h3>Rating</h3>
-            <div class="stat-value">4.9⭐</div>
-            <p>From 45 reviews</p>
+            <div class="stat-value" id="stat-rating">—</div>
+            <p>From reviews</p>
         </div>
         <div class="stat-card">
             <h3>Total Hours</h3>
-            <div class="stat-value">560</div>
+            <div class="stat-value" id="stat-hours">0</div>
             <p>Teaching hours</p>
         </div>
     </div>
 
-    <!-- My Offers -->
+    <!-- My Offers (real data) -->
     <div class="section">
         <div class="section-header">
             <h2>My Teaching Offers</h2>
-            <button class="btn-primary" onclick="alert('Add new offer')">+ New Offer</button>
+            <button type="button" class="btn-primary" id="btn-new-offer">+ New Offer</button>
         </div>
-        <div class="offers-grid">
-            <div class="offer-card">
-                <h3>Mathematics Tutor</h3>
-                <p class="subject-badge">📐 High School Math</p>
-                <div class="offer-info">
-                    <p>💵 Rs. 2,000/hour</p>
-                    <p>📍 Gulshan-e-Iqbal, Karachi</p>
-                    <p>⭐ Highly Rated</p>
-                </div>
-                <p class="offer-desc">Offering tuition for algebra, geometry, and calculus to high school students.</p>
-                <div class="offer-actions">
-                    <a href="#" class="btn-small">Edit</a>
-                    <a href="#" class="btn-small">Pause</a>
-                </div>
-            </div>
-
-            <div class="offer-card">
-                <h3>Physics Tutor</h3>
-                <p class="subject-badge">🔬 AP Physics</p>
-                <div class="offer-info">
-                    <p>💵 Rs. 2,200/hour</p>
-                    <p>📍 Defence, Karachi</p>
-                    <p>⭐ Expert Level</p>
-                </div>
-                <p class="offer-desc">Expert AP Physics tuition for advanced students preparing for exams.</p>
-                <div class="offer-actions">
-                    <a href="#" class="btn-small">Edit</a>
-                    <a href="#" class="btn-small">Pause</a>
-                </div>
-            </div>
-
-            <div class="offer-card">
-                <h3>Test Prep</h3>
-                <p class="subject-badge">📝 SAT/ACT</p>
-                <div class="offer-info">
-                    <p>💵 Rs. 2,400/hour</p>
-                    <p>📍 Clifton, Karachi</p>
-                    <p>⭐ Test Specialist</p>
-                </div>
-                <p class="offer-desc">Comprehensive SAT/ACT preparation with proven results.</p>
-                <div class="offer-actions">
-                    <a href="#" class="btn-small">Edit</a>
-                    <a href="#" class="btn-small">Pause</a>
-                </div>
-            </div>
+        <div class="offers-grid" id="offers-grid">
+            <p class="empty-state">No offers yet. Add one to get students.</p>
         </div>
     </div>
 
-    <!-- Pending Matches -->
+    <!-- New/Edit Offer Modal -->
+    <div class="modal-overlay" id="offer-modal" aria-hidden="true">
+        <div class="modal" role="dialog" aria-labelledby="offer-modal-title">
+            <div class="modal-header">
+                <h2 id="offer-modal-title">New Offer</h2>
+                <button type="button" class="modal-close" id="offer-modal-close" aria-label="Close">&times;</button>
+            </div>
+            <form id="offer-form">
+                <input type="hidden" id="offer-id" name="offerId" value="">
+                <div class="form-group">
+                    <label for="offer-subject">Title / Subject</label>
+                    <input type="text" id="offer-subject" name="subject" required placeholder="e.g. Mathematics Tutor">
+                </div>
+                <div class="form-group">
+                    <label for="offer-subject-badge">Subject Badge</label>
+                    <input type="text" id="offer-subject-badge" name="subjectBadge" placeholder="e.g. High School Math">
+                </div>
+                <div class="form-group">
+                    <label for="offer-rate">Hourly Rate (Rs.)</label>
+                    <input type="number" id="offer-rate" name="rate" min="0" step="100" placeholder="2000">
+                </div>
+                <div class="form-group">
+                    <label for="offer-location">Location</label>
+                    <input type="text" id="offer-location" name="location" placeholder="e.g. Gulshan-e-Iqbal, Karachi">
+                </div>
+                <div class="form-group">
+                    <label for="offer-description">Description</label>
+                    <textarea id="offer-description" name="description" rows="3" placeholder="Brief description of what you offer"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="offer-modal-cancel">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Offer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pending Matches (real data) -->
     <div class="section">
         <h2>Pending Match Requests</h2>
-        <div class="matches-list">
-            <div class="match-item">
-                <div class="match-avatar">AM</div>
-                <div class="match-details">
-                    <!-- Updated to Pakistani student names and Karachi areas -->
-                    <h3>Ayesha Malik</h3>
-                    <p>Looking for: Mathematics Tutor</p>
-                    <p>Budget: Rs. 1,600-2,000/hour | Location: Gulshan-e-Iqbal</p>
-                </div>
-                <div class="match-actions">
-                    <button class="btn-small btn-accept" onclick="alert('Accepted')">Accept</button>
-                    <button class="btn-small btn-reject" onclick="alert('Declined')">Decline</button>
-                </div>
-            </div>
-
-            <div class="match-item">
-                <div class="match-avatar">NK</div>
-                <div class="match-details">
-                    <h3>Nida Khan</h3>
-                    <p>Looking for: Physics Tutor</p>
-                    <p>Budget: Rs. 2,000-2,400/hour | Location: Defence</p>
-                </div>
-                <div class="match-actions">
-                    <button class="btn-small btn-accept" onclick="alert('Accepted')">Accept</button>
-                    <button class="btn-small btn-reject" onclick="alert('Declined')">Decline</button>
-                </div>
-            </div>
+        <div class="matches-list" id="matches-list">
+            <p class="empty-state">No pending requests.</p>
         </div>
     </div>
 
-    <!-- Upcoming Sessions -->
+    <!-- Upcoming Sessions (real data) -->
     <div class="section">
         <h2>Your Upcoming Sessions</h2>
-        <div class="sessions-list">
-            <div class="session-item">
-                <div class="session-avatar">AM</div>
-                <div class="session-details">
-                    <h3>Ayesha Malik - Mathematics</h3>
-                    <p>Today 3:00 PM | Duration: 1 hour</p>
-                </div>
-                <button class="btn-small">Start Class</button>
-            </div>
-            <div class="session-item">
-                <div class="session-avatar">NK</div>
-                <div class="session-details">
-                    <h3>Nida Khan - Physics</h3>
-                    <p>Tomorrow 2:00 PM | Duration: 1.5 hours</p>
-                </div>
-                <button class="btn-small">Prepare</button>
-            </div>
+        <div class="sessions-list" id="teacher-sessions-list">
+            <p class="empty-state">No upcoming sessions.</p>
         </div>
     </div>
     </main>
     <script src="/js/dashboard-auth.js"></script>
+    <script src="/js/teacher-dashboard-data.js"></script>
 </body>
 </html>

@@ -450,8 +450,16 @@
     pointer-events: none;
   }
 
+  .collapse {
+    visibility: collapse;
+  }
+
   .invisible {
     visibility: hidden;
+  }
+
+  .visible {
+    visibility: visible;
   }
 
   .sr-only {
@@ -476,6 +484,10 @@
 
   .relative {
     position: relative;
+  }
+
+  .static {
+    position: static;
   }
 
   .inset-0 {
@@ -2422,6 +2434,10 @@
 
   .\[--cell-size\:--spacing\(8\)\] {
     --cell-size: calc(var(--spacing) * 8);
+  }
+
+  .paused {
+    animation-play-state: paused;
   }
 
   .running {

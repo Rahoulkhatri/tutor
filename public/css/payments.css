@@ -187,6 +187,18 @@ body {
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
+.section-desc {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.empty-state {
+    color: #666;
+    padding: 24px;
+    text-align: center;
+}
+
 .section h2 {
     font-size: 20px;
     margin-bottom: 20px;
