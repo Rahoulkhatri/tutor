@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { getDb, SESSIONS_COLLECTION, USERS_COLLECTION } from "@/lib/mongodb";
-import { ObjectId } from "mongodb";
+import { query } from "@/lib/db";
 
-// GET: List payments (fees) the student has made to teachers (from sessions)
 export async function GET() {
   try {
     const session = await getSession();
@@ -11,25 +9,36 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const db = await getDb();
-    const sessions = await db
-      .collection(SESSIONS_COLLECTION)
-      .find({ studentId: session.userId })
-      .sort({ scheduledAt: -1 })
-      .limit(100)
-      .toArray();
+    const studentId = parseInt(session.userId, 10);
+    if (Number.isNaN(studentId)) {
+      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
+    }
 
-    const teacherIds = [...new Set(sessions.map((s) => s.teacherId).filter(Boolean))];
-    const teachers =
-      teacherIds.length > 0
-        ? await db
-            .collection(USERS_COLLECTION)
-            .find({ _id: { $in: teacherIds.map((id) => new ObjectId(id)) } })
-            .toArray()
-        : [];
-    const teacherMap = Object.fromEntries(
-      teachers.map((t) => [String(t._id), (t as { name?: string | null }).name || "Teacher"])
+    const { rows: sessions } = await query<{
+      id: number;
+      teacher_id: number;
+      subject: string | null;
+      scheduled_at: Date;
+      duration_hours: string;
+      amount: string;
+      status: string;
+    }>(
+      "SELECT id, teacher_id, subject, scheduled_at, duration_hours, amount, status FROM sessions WHERE student_id = $1 ORDER BY scheduled_at DESC LIMIT 100",
+      [studentId]
     );
+
+    const teacherIds = [...new Set(sessions.map((s) => s.teacher_id))];
+    let teacherMap: Record<number, string> = {};
+    if (teacherIds.length > 0) {
+      const placeholders = teacherIds.map((_, i) => `$${i + 1}`).join(", ");
+      const { rows: userRows } = await query<{ id: number; name: string | null }>(
+        `SELECT id, name FROM users WHERE id IN (${placeholders})`,
+        teacherIds
+      );
+      teacherMap = Object.fromEntries(
+        userRows.map((t) => [t.id, t.name || "Teacher"])
+      );
+    }
 
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -39,14 +48,19 @@ export async function GET() {
     const payments = sessions.map((s) => {
       const amount = Number(s.amount) || 0;
       totalPaid += amount;
-      if (s.scheduledAt && new Date(s.scheduledAt) >= startOfMonth) thisMonthPaid += amount;
+      if (
+        s.scheduled_at &&
+        new Date(s.scheduled_at) >= startOfMonth
+      ) {
+        thisMonthPaid += amount;
+      }
       return {
-        id: String(s._id),
-        teacherId: s.teacherId,
-        teacherName: teacherMap[s.teacherId as string] || "Teacher",
+        id: String(s.id),
+        teacherId: String(s.teacher_id),
+        teacherName: teacherMap[s.teacher_id] || "Teacher",
         subject: s.subject || "Session",
-        scheduledAt: s.scheduledAt,
-        durationHours: s.durationHours ?? 1,
+        scheduledAt: s.scheduled_at,
+        durationHours: s.duration_hours ?? 1,
         amount,
         status: s.status || "confirmed",
       };

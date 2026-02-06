@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { getDb, TEACHING_OFFERS_COLLECTION } from "@/lib/mongodb";
+import { query } from "@/lib/db";
 
 export async function POST(request: Request) {
   try {
@@ -11,38 +11,52 @@ export async function POST(request: Request) {
 
     const body = await request.json();
     const subject = typeof body.subject === "string" ? body.subject.trim() : "";
-    const subjectBadge = typeof body.subjectBadge === "string" ? body.subjectBadge.trim() : subject || "Subject";
-    const rate = typeof body.rate === "number" ? body.rate : Number(body.rate) || 0;
-    const location = typeof body.location === "string" ? body.location.trim() : "";
-    const description = typeof body.description === "string" ? body.description.trim() : "";
+    const subjectBadge =
+      typeof body.subjectBadge === "string"
+        ? body.subjectBadge.trim()
+        : subject || "Subject";
+    const rate =
+      typeof body.rate === "number" ? body.rate : Number(body.rate) || 0;
+    const location =
+      typeof body.location === "string" ? body.location.trim() : "";
+    const description =
+      typeof body.description === "string" ? body.description.trim() : "";
 
     if (!subject) {
-      return NextResponse.json({ error: "Subject/title is required" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Subject/title is required" },
+        { status: 400 }
+      );
     }
 
-    const db = await getDb();
-    const now = new Date();
-    const doc = {
-      userId: session.userId,
+    const userId = parseInt(session.userId, 10);
+    if (Number.isNaN(userId)) {
+      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
+    }
+
+    const { rows } = await query<{ id: number }>(
+      `INSERT INTO teaching_offers (user_id, subject, subject_badge, rate, location, description, status)
+       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`,
+      [
+        userId,
+        subject,
+        subjectBadge,
+        Math.max(0, rate),
+        location,
+        description,
+        "active",
+      ]
+    );
+    const id = rows[0]?.id;
+
+    return NextResponse.json({
+      id: id != null ? String(id) : undefined,
       subject,
       subjectBadge,
       rate: Math.max(0, rate),
       location,
       description,
       status: "active",
-      createdAt: now,
-      updatedAt: now,
-    };
-
-    const result = await db.collection(TEACHING_OFFERS_COLLECTION).insertOne(doc);
-    return NextResponse.json({
-      id: result.insertedId.toString(),
-      subject: doc.subject,
-      subjectBadge: doc.subjectBadge,
-      rate: doc.rate,
-      location: doc.location,
-      description: doc.description,
-      status: doc.status,
     });
   } catch (e) {
     console.error("POST /api/teacher/offers error:", e);

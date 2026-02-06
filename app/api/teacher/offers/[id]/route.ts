@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { getDb, TEACHING_OFFERS_COLLECTION } from "@/lib/mongodb";
-import { ObjectId } from "mongodb";
+import { queryOne, query } from "@/lib/db";
+
+function validId(id: unknown): id is string {
+  return typeof id === "string" && /^\d+$/.test(id.trim());
+}
 
 export async function PATCH(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -14,42 +17,83 @@ export async function PATCH(
     }
 
     const { id } = await params;
-    if (!id || !ObjectId.isValid(id)) {
+    if (!id || !validId(id)) {
       return NextResponse.json({ error: "Invalid offer id" }, { status: 400 });
     }
 
-    const body = await _request.json();
-    const db = await getDb();
-    const coll = db.collection(TEACHING_OFFERS_COLLECTION);
-    const oid = new ObjectId(id);
+    const offerId = parseInt(id, 10);
+    const userId = parseInt(session.userId, 10);
+    if (Number.isNaN(userId)) {
+      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
+    }
 
-    const existing = await coll.findOne({ _id: oid, userId: session.userId });
+    const existing = await queryOne<{
+      subject: string | null;
+      subject_badge: string | null;
+      rate: string;
+      location: string | null;
+      description: string | null;
+      status: string;
+    }>(
+      "SELECT subject, subject_badge, rate, location, description, status FROM teaching_offers WHERE id = $1 AND user_id = $2",
+      [offerId, userId]
+    );
     if (!existing) {
       return NextResponse.json({ error: "Offer not found" }, { status: 404 });
     }
 
-    const update: Record<string, unknown> = { updatedAt: new Date() };
-
-    if (typeof body.status === "string" && (body.status === "paused" || body.status === "active")) {
-      update.status = body.status;
+    const body = await request.json();
+    let status = existing.status;
+    if (
+      typeof body.status === "string" &&
+      (body.status === "paused" || body.status === "active")
+    ) {
+      status = body.status;
     }
-    if (body.subject !== undefined) update.subject = typeof body.subject === "string" ? body.subject.trim() : existing.subject;
-    if (body.subjectBadge !== undefined) update.subjectBadge = typeof body.subjectBadge === "string" ? body.subjectBadge.trim() : existing.subjectBadge;
-    if (body.rate !== undefined) update.rate = Math.max(0, Number(body.rate) || 0);
-    if (body.location !== undefined) update.location = typeof body.location === "string" ? body.location.trim() : existing.location;
-    if (body.description !== undefined) update.description = typeof body.description === "string" ? body.description.trim() : existing.description;
+    let subject = existing.subject;
+    if (body.subject !== undefined) {
+      subject =
+        typeof body.subject === "string" ? body.subject.trim() : existing.subject;
+    }
+    let subjectBadge = existing.subject_badge;
+    if (body.subjectBadge !== undefined) {
+      subjectBadge =
+        typeof body.subjectBadge === "string"
+          ? body.subjectBadge.trim()
+          : existing.subject_badge;
+    }
+    let rate = Number(existing.rate) || 0;
+    if (body.rate !== undefined) {
+      rate = Math.max(0, Number(body.rate) || 0);
+    }
+    let location = existing.location;
+    if (body.location !== undefined) {
+      location =
+        typeof body.location === "string"
+          ? body.location.trim()
+          : existing.location;
+    }
+    let description = existing.description;
+    if (body.description !== undefined) {
+      description =
+        typeof body.description === "string"
+          ? body.description.trim()
+          : existing.description;
+    }
 
-    await coll.updateOne({ _id: oid, userId: session.userId }, { $set: update });
+    await query(
+      `UPDATE teaching_offers SET subject = $1, subject_badge = $2, rate = $3, location = $4, description = $5, status = $6, updated_at = NOW() WHERE id = $7 AND user_id = $8`,
+      [subject, subjectBadge, rate, location, description, status, offerId, userId]
+    );
 
-    const updated = await coll.findOne({ _id: oid });
     return NextResponse.json({
-      id: updated?._id?.toString(),
-      subject: updated?.subject,
-      subjectBadge: updated?.subjectBadge,
-      rate: updated?.rate,
-      location: updated?.location,
-      description: updated?.description,
-      status: updated?.status,
+      id,
+      subject,
+      subjectBadge,
+      rate,
+      location,
+      description,
+      status,
     });
   } catch (e) {
     console.error("PATCH /api/teacher/offers/[id] error:", e);

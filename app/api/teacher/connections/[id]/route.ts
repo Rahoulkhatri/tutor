@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { getDb, CONNECTIONS_COLLECTION } from "@/lib/mongodb";
-import { ObjectId } from "mongodb";
+import { queryOne, query } from "@/lib/db";
 
-/**
- * PATCH: Teacher accepts or declines a connection request.
- * Body: { action: "accept" | "decline" }
- */
+function validId(id: unknown): id is string {
+  return typeof id === "string" && /^\d+$/.test(id.trim());
+}
+
 export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -18,30 +17,51 @@ export async function PATCH(
     }
 
     const { id } = await params;
-    if (!id || !ObjectId.isValid(id)) {
-      return NextResponse.json({ error: "Invalid connection id" }, { status: 400 });
+    if (!id || !validId(id)) {
+      return NextResponse.json(
+        { error: "Invalid connection id" },
+        { status: 400 }
+      );
     }
 
     const body = await request.json();
-    const action = body.action === "accept" ? "accept" : body.action === "decline" ? "decline" : null;
+    const action =
+      body.action === "accept"
+        ? "accept"
+        : body.action === "decline"
+          ? "decline"
+          : null;
     if (!action) {
-      return NextResponse.json({ error: "action must be 'accept' or 'decline'" }, { status: 400 });
+      return NextResponse.json(
+        { error: "action must be 'accept' or 'decline'" },
+        { status: 400 }
+      );
     }
 
-    const db = await getDb();
-    const coll = db.collection(CONNECTIONS_COLLECTION);
-    const oid = new ObjectId(id);
-    const conn = await coll.findOne({ _id: oid, teacherId: session.userId, status: "pending" });
+    const connectionId = parseInt(id, 10);
+    const teacherId = parseInt(session.userId, 10);
+    if (Number.isNaN(teacherId)) {
+      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
+    }
+
+    const conn = await queryOne(
+      "SELECT id FROM connections WHERE id = $1 AND teacher_id = $2 AND status = $3",
+      [connectionId, teacherId, "pending"]
+    );
     if (!conn) {
-      return NextResponse.json({ error: "Request not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Request not found" },
+        { status: 404 }
+      );
     }
 
-    if (action === "accept") {
-      await coll.updateOne({ _id: oid }, { $set: { status: "active", updatedAt: new Date() } });
-      return NextResponse.json({ success: true, status: "active" });
-    }
-    await coll.updateOne({ _id: oid }, { $set: { status: "declined", updatedAt: new Date() } });
-    return NextResponse.json({ success: true, status: "declined" });
+    const newStatus = action === "accept" ? "active" : "declined";
+    await query(
+      "UPDATE connections SET status = $1, updated_at = NOW() WHERE id = $2",
+      [newStatus, connectionId]
+    );
+
+    return NextResponse.json({ success: true, status: newStatus });
   } catch (e) {
     console.error("PATCH /api/teacher/connections/[id] error:", e);
     return NextResponse.json({ error: "Something went wrong" }, { status: 500 });

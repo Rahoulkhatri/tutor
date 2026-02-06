@@ -1,11 +1,4 @@
 {
   "/(admin)/page": "app/(admin)/page.js",
-  "/api/auth/login/route": "app/api/auth/login/route.js",
-  "/api/auth/logout/route": "app/api/auth/logout/route.js",
-  "/api/auth/me/route": "app/api/auth/me/route.js",
-  "/api/chat/conversations/route": "app/api/chat/conversations/route.js",
-  "/api/chat/messages/route": "app/api/chat/messages/route.js",
-  "/api/student/dashboard/route": "app/api/student/dashboard/route.js",
-  "/api/student/offers/route": "app/api/student/offers/route.js",
-  "/api/teacher/dashboard/route": "app/api/teacher/dashboard/route.js"
+  "/api/auth/login/route": "app/api/auth/login/route.js"
 }

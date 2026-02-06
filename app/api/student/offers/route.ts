@@ -1,12 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { getDb, USERS_COLLECTION, TEACHING_OFFERS_COLLECTION, CONNECTIONS_COLLECTION } from "@/lib/mongodb";
-import { ObjectId } from "mongodb";
+import { query } from "@/lib/db";
 
-/**
- * GET: List all active teaching offers for students (only status: "active").
- * Includes teacher name and connection status (none / pending / active) for current student.
- */
 export async function GET() {
   try {
     const session = await getSession();
@@ -14,39 +9,53 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const db = await getDb();
-    const studentId = session.userId;
+    const studentId = parseInt(session.userId, 10);
+    if (Number.isNaN(studentId)) {
+      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
+    }
 
-    const offers = await db
-      .collection(TEACHING_OFFERS_COLLECTION)
-      .find({ status: "active" })
-      .toArray();
+    const { rows: offers } = await query<{
+      id: number;
+      user_id: number;
+      subject: string | null;
+      subject_badge: string | null;
+      rate: string;
+      location: string | null;
+      description: string | null;
+    }>(
+      "SELECT id, user_id, subject, subject_badge, rate, location, description FROM teaching_offers WHERE status = $1",
+      ["active"]
+    );
 
-    const teacherIds = [...new Set(offers.map((o) => o.userId).filter(Boolean))];
-    const teachers =
-      teacherIds.length > 0
-        ? await db
-            .collection(USERS_COLLECTION)
-            .find({ _id: { $in: teacherIds.map((id) => new ObjectId(id)) } })
-            .toArray()
-        : [];
-    const teacherMap = Object.fromEntries(teachers.map((t) => [t._id.toString(), t]));
+    const teacherIds = [...new Set(offers.map((o) => o.user_id))];
+    let teachers: { id: number; name: string | null }[] = [];
+    if (teacherIds.length > 0) {
+      const placeholders = teacherIds.map((_, i) => `$${i + 1}`).join(", ");
+      const { rows } = await query<{ id: number; name: string | null }>(
+        `SELECT id, name FROM users WHERE id IN (${placeholders})`,
+        teacherIds
+      );
+      teachers = rows;
+    }
+    const teacherMap = Object.fromEntries(teachers.map((t) => [t.id, t]));
 
-    const myConnections = await db
-      .collection(CONNECTIONS_COLLECTION)
-      .find({ studentId })
-      .toArray();
+    const { rows: myConnections } = await query<{
+      teacher_id: number;
+      status: string;
+    }>("SELECT teacher_id, status FROM connections WHERE student_id = $1", [
+      studentId,
+    ]);
     const connectionByTeacher = Object.fromEntries(
-      myConnections.map((c) => [c.teacherId, c.status as string])
+      myConnections.map((c) => [String(c.teacher_id), c.status])
     );
 
     const courses = offers.map((o) => {
-      const teacherId = o.userId?.toString();
-      const teacher = teacherMap[teacherId];
+      const teacherId = String(o.user_id);
+      const teacher = teacherMap[o.user_id];
       const connectionStatus = connectionByTeacher[teacherId] || "none";
       return {
-        id: o._id?.toString(),
-        offerId: o._id?.toString(),
+        id: String(o.id),
+        offerId: String(o.id),
         teacherId,
         teacherName: teacher?.name || "Teacher",
         teacherInitials: teacher?.name
@@ -59,8 +68,11 @@ export async function GET() {
               .toUpperCase()
           : "T",
         title: o.subject || "Tutoring",
-        subjectBadge: o.subjectBadge || o.subject || "Subject",
-        rate: o.rate != null ? `Rs. ${Number(o.rate).toLocaleString()}/hour` : "",
+        subjectBadge: o.subject_badge || o.subject || "Subject",
+        rate:
+          o.rate != null
+            ? `Rs. ${Number(o.rate).toLocaleString()}/hour`
+            : "",
         location: o.location || "",
         description: o.description || "",
         connectionStatus,

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb, USERS_COLLECTION } from "@/lib/mongodb";
+import { queryOne, query } from "@/lib/db";
 import { createSession } from "@/lib/auth";
 import bcrypt from "bcryptjs";
 
@@ -29,10 +29,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const db = await getDb();
-    const existing = await db.collection(USERS_COLLECTION).findOne({
-      email: email.trim().toLowerCase(),
-    });
+    const existing = await queryOne(
+      "SELECT id FROM users WHERE email = $1",
+      [email.trim().toLowerCase()]
+    );
     if (existing) {
       return NextResponse.json(
         { error: "An account with this email already exists" },
@@ -41,18 +41,18 @@ export async function POST(request: NextRequest) {
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
-    const now = new Date();
-    const { insertedId } = await db.collection(USERS_COLLECTION).insertOne({
-      email: email.trim().toLowerCase(),
-      passwordHash,
-      name: name?.trim() || null,
-      role,
-      createdAt: now,
-      updatedAt: now,
-    });
+    const { rows } = await query<{ id: number }>(
+      `INSERT INTO users (email, password_hash, name, role) VALUES ($1, $2, $3, $4) RETURNING id`,
+      [email.trim().toLowerCase(), passwordHash, name?.trim() || null, role]
+    );
+    const newId = rows[0]?.id;
+
+    if (!newId) {
+      return NextResponse.json({ error: "Failed to create user" }, { status: 500 });
+    }
 
     await createSession({
-      userId: String(insertedId),
+      userId: String(newId),
       email: email.trim().toLowerCase(),
       name: name?.trim() || null,
       role: role as "student" | "teacher" | "admin",

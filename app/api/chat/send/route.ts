@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { getDb, MESSAGES_COLLECTION, USERS_COLLECTION } from "@/lib/mongodb";
-import { ObjectId } from "mongodb";
+import { queryOne, query } from "@/lib/db";
+
+function validId(id: unknown): id is string {
+  return typeof id === "string" && /^\d+$/.test(id.trim());
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,28 +17,42 @@ export async function POST(request: NextRequest) {
     const toUserId = (body.toUserId as string)?.trim();
     const text = (body.text as string)?.trim();
 
-    if (!toUserId || !ObjectId.isValid(toUserId)) {
-      return NextResponse.json({ error: "Invalid recipient" }, { status: 400 });
+    if (!toUserId || !validId(toUserId)) {
+      return NextResponse.json(
+        { error: "Invalid recipient" },
+        { status: 400 }
+      );
     }
     if (!text || text.length > 5000) {
-      return NextResponse.json({ error: "Message text required (max 5000 chars)" }, { status: 400 });
+      return NextResponse.json(
+        {
+          error: "Message text required (max 5000 chars)",
+        },
+        { status: 400 }
+      );
     }
 
-    const db = await getDb();
-    const recipient = await db
-      .collection(USERS_COLLECTION)
-      .findOne({ _id: new ObjectId(toUserId) });
+    const recipient = await queryOne(
+      "SELECT id FROM users WHERE id = $1",
+      [parseInt(toUserId, 10)]
+    );
     if (!recipient) {
-      return NextResponse.json({ error: "Recipient not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Recipient not found" },
+        { status: 404 }
+      );
     }
 
-    const doc = {
-      senderId: String(session.userId),
-      receiverId: String(toUserId),
-      text,
-      createdAt: new Date(),
-    };
-    await db.collection(MESSAGES_COLLECTION).insertOne(doc);
+    const senderId = parseInt(session.userId, 10);
+    const receiverId = parseInt(toUserId, 10);
+    if (Number.isNaN(senderId)) {
+      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
+    }
+
+    await query(
+      `INSERT INTO messages (sender_id, receiver_id, text) VALUES ($1, $2, $3)`,
+      [senderId, receiverId, text]
+    );
 
     return NextResponse.json({ success: true });
   } catch (e) {

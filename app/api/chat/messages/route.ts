@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { getDb, MESSAGES_COLLECTION, USERS_COLLECTION } from "@/lib/mongodb";
-import { ObjectId } from "mongodb";
+import { query } from "@/lib/db";
+
+function validId(id: unknown): id is string {
+  return typeof id === "string" && /^\d+$/.test(id.trim());
+}
 
 export async function GET(request: NextRequest) {
   try {
@@ -11,32 +14,36 @@ export async function GET(request: NextRequest) {
     }
 
     const withUserId = (request.nextUrl.searchParams.get("with") || "").trim();
-    if (!withUserId || !ObjectId.isValid(withUserId)) {
+    if (!withUserId || !validId(withUserId)) {
       return NextResponse.json({ messages: [] });
     }
 
-    const myId = String(session.userId);
-    const otherId = String(withUserId);
-    const db = await getDb();
-    const messages = await db
-      .collection(MESSAGES_COLLECTION)
-      .find({
-        $or: [
-          { senderId: myId, receiverId: otherId },
-          { senderId: otherId, receiverId: myId },
-        ],
-      })
-      .sort({ createdAt: 1 })
-      .limit(200)
-      .toArray();
+    const myId = parseInt(session.userId, 10);
+    const otherId = parseInt(withUserId, 10);
+    if (Number.isNaN(myId)) {
+      return NextResponse.json({ messages: [] });
+    }
+
+    const { rows: messages } = await query<{
+      id: number;
+      sender_id: number;
+      receiver_id: number;
+      text: string;
+      created_at: Date;
+    }>(
+      `SELECT id, sender_id, receiver_id, text, created_at FROM messages
+       WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1)
+       ORDER BY created_at ASC LIMIT 200`,
+      [myId, otherId]
+    );
 
     const list = messages.map((m) => ({
-      id: String(m._id),
-      senderId: m.senderId,
-      receiverId: m.receiverId,
+      id: String(m.id),
+      senderId: String(m.sender_id),
+      receiverId: String(m.receiver_id),
       text: m.text,
-      time: m.createdAt,
-      isSent: String(m.senderId) === myId,
+      time: m.created_at,
+      isSent: m.sender_id === myId,
     }));
 
     return NextResponse.json({ messages: list });
