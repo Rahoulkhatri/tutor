@@ -12,7 +12,8 @@ export function middleware(request: NextRequest) {
       pathname.startsWith("/performance") || pathname.startsWith("/site-insights") ||
       pathname.startsWith("/ratings") || pathname.startsWith("/settings") ||
       pathname.startsWith("/help")) {
-    const session = request.cookies.get("tutorconnect_session");
+    // Django session cookie name (default sessionid)
+    const session = request.cookies.get("sessionid");
     if (!session?.value) {
       const loginUrl = new URL("/login.html", request.url);
       loginUrl.searchParams.set("from", pathname || "admin");

@@ -25,7 +25,7 @@
 
     listEl.innerHTML = "<p class=\"empty-state\">Loading…</p>";
 
-    fetch("/api/student/payments", { credentials: "same-origin" })
+    fetch((window.API_BASE || '') + "/api/student/payments/", { credentials: "include" })
       .then(function (r) {
         if (!r.ok) throw new Error("Failed to load");
         return r.json();
@@ -67,7 +67,7 @@
   }
 
   // Check auth and role, then show correct view
-  fetch("/api/auth/me", { credentials: "same-origin" })
+  fetch((window.API_BASE || '') + "/api/auth/me/", { credentials: "include" })
     .then(function (r) {
       if (r.status === 401) {
         window.location.href = "/login.html?redirect=" + encodeURIComponent(window.location.pathname + window.location.search);

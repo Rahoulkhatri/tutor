@@ -176,9 +176,9 @@
         if (!offerId) return;
         btn.disabled = true;
         btn.textContent = "Sending...";
-        fetch("/api/student/request-connection", {
+        fetch((window.API_BASE || '') + "/api/student/request-connection/", {
           method: "POST",
-          credentials: "same-origin",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ offerId: offerId }),
         })
@@ -242,7 +242,7 @@
   function fetchCourses() {
     if (!tutorsList) return;
     tutorsList.innerHTML = "<p>Loading tutors...</p>";
-    fetch("/api/student/offers", { credentials: "same-origin" })
+    fetch((window.API_BASE || '') + "/api/student/offers/", { credentials: "include" })
       .then(function (res) {
         if (!res.ok) {
           tutorsList.innerHTML =

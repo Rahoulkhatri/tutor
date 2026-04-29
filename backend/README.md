@@ -62,10 +62,12 @@ Static HTML/JS ko **Django backend** se run karna ho to:
 1. Django me `public` folder ko **static** serve karo, ya
 2. Frontend ko alag (e.g. `npm run dev` on port 3000) chalao aur **CORS** already on hai; sirf fetch URL change karo: `http://localhost:8000/api/...` (ya relative `/api/...` agar same origin pe proxy karo).
 
-## Seed users
+## Seed users (run `python manage.py seed` once)
 
-- **Student:** student@tutorconnect.com / student123  
-- **Teacher:** teacher@tutorconnect.com / teacher123  
-- **Admin:** admin@tutorconnect.com / admin123  
+- **Student:** student@tutorconnect.com / **password123**
+- **Teacher:** teacher@tutorconnect.com / **password123**
+- **Admin:** admin@tutorconnect.com / **admin123**
+
+Agar login pe **401 Unauthorized** aaye to: (1) `python manage.py seed` chala ke demo users create karo, (2) upar wale password sahi use karo (Admin = admin123, Student/Teacher = password123).
 
 `python manage.py seed` dobara chalane se demo offers/connections/sessions wapas create ho jayenge (pehle wale delete ho kar).

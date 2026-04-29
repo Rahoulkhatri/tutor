@@ -63,15 +63,19 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     }
 
     try {
-        const res = await fetch('/api/auth/login', {
+        const res = await fetch((window.API_BASE || '') + '/api/auth/login/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, role }),
+            credentials: 'include',
         });
         const data = await res.json().catch(() => ({}));
 
         if (!res.ok) {
-            showAuthError(form, data.error || 'Login failed. Try again.');
+            let msg = data.error || (res.status === 401 ? 'Invalid email or password.' : 'Login failed. Try again.');
+            if (res.status === 401 && !data.error) msg = 'Invalid email or password. Use: student@tutorconnect.com / password123';
+            if (res.status === 500 && data.detail) msg = 'Server error: ' + data.detail.substring(0, 150);
+            showAuthError(form, msg);
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Sign In';
@@ -112,10 +116,11 @@ document.getElementById('signupForm')?.addEventListener('submit', async (e) => {
     }
 
     try {
-        const res = await fetch('/api/auth/signup', {
+        const res = await fetch((window.API_BASE || '') + '/api/auth/signup/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, name: fullname, role }),
+            credentials: 'include',
         });
         const data = await res.json().catch(() => ({}));
 

@@ -1,6 +1,6 @@
 (function () {
   function loadDashboard() {
-    fetch("/api/student/dashboard", { credentials: "same-origin" })
+    fetch((window.API_BASE || '') + "/api/student/dashboard/", { credentials: "include" })
       .then(function (res) {
         if (!res.ok) return;
         return res.json();
@@ -84,7 +84,7 @@
   function loadAvailableCourses() {
         var grid = document.getElementById("available-courses-grid");
     if (!grid) return;
-    fetch("/api/student/offers", { credentials: "same-origin" })
+    fetch((window.API_BASE || '') + "/api/student/offers/", { credentials: "include" })
       .then(function (res) {
         if (!res.ok) {
           grid.innerHTML = "<p class=\"empty-state\">Unable to load courses.</p>";
@@ -148,9 +148,9 @@
             if (!offerId) return;
             btn.disabled = true;
             btn.textContent = "Sending...";
-            fetch("/api/student/request-connection", {
+            fetch((window.API_BASE || '') + "/api/student/request-connection/", {
               method: "POST",
-              credentials: "same-origin",
+              credentials: "include",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ offerId: offerId }),
             })
@@ -253,9 +253,9 @@
         submitBtn.textContent = "Scheduling…";
       }
 
-      fetch("/api/student/sessions", {
+      fetch((window.API_BASE || '') + "/api/student/sessions/", {
         method: "POST",
-        credentials: "same-origin",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           teacherId: teacherId.trim(),

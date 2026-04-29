@@ -27,7 +27,8 @@ function middleware(request) {
     const { pathname } = request.nextUrl;
     // Protect admin app routes (not static files)
     if (pathname === "/" || pathname.startsWith("/students") || pathname.startsWith("/teachers") || pathname.startsWith("/matches") || pathname.startsWith("/transactions") || pathname.startsWith("/schedule") || pathname.startsWith("/payouts") || pathname.startsWith("/performance") || pathname.startsWith("/site-insights") || pathname.startsWith("/ratings") || pathname.startsWith("/settings") || pathname.startsWith("/help")) {
-        const session = request.cookies.get("tutorconnect_session");
+        // Django session cookie name (default sessionid)
+        const session = request.cookies.get("sessionid");
         if (!session?.value) {
             const loginUrl = new URL("/login.html", request.url);
             loginUrl.searchParams.set("from", pathname || "admin");

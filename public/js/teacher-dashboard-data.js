@@ -42,7 +42,7 @@
   }
 
   function loadDashboard() {
-    fetch("/api/teacher/dashboard", { credentials: "same-origin" })
+    fetch((window.API_BASE || '') + "/api/teacher/dashboard/", { credentials: "include" })
       .then(function (res) {
         if (!res.ok) return;
         return res.json();
@@ -184,9 +184,9 @@
       if (t.classList.contains("btn-accept") || t.classList.contains("btn-reject")) {
         e.preventDefault();
         var action = t.classList.contains("btn-accept") ? "accept" : "decline";
-        fetch("/api/teacher/connections/" + encodeURIComponent(connId), {
+        fetch((window.API_BASE || '') + "/api/teacher/connections/" + encodeURIComponent(connId) + "/", {
           method: "PATCH",
-          credentials: "same-origin",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ action: action }),
         })
@@ -210,9 +210,9 @@
       e.preventDefault();
       var id = target.getAttribute("data-offer-id");
       if (!id) return;
-      fetch("/api/teacher/offers/" + encodeURIComponent(id), {
+      fetch((window.API_BASE || '') + "/api/teacher/offers/" + encodeURIComponent(id) + "/", {
         method: "PATCH",
-        credentials: "same-origin",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: "paused" }),
       })
@@ -224,9 +224,9 @@
       e.preventDefault();
       var id = target.getAttribute("data-offer-id");
       if (!id) return;
-      fetch("/api/teacher/offers/" + encodeURIComponent(id), {
+      fetch((window.API_BASE || '') + "/api/teacher/offers/" + encodeURIComponent(id) + "/", {
         method: "PATCH",
-        credentials: "same-origin",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: "active" }),
       })
@@ -249,7 +249,7 @@
 
       if (!subject) return;
 
-      var url = id ? "/api/teacher/offers/" + encodeURIComponent(id) : "/api/teacher/offers";
+      var url = (window.API_BASE || '') + (id ? "/api/teacher/offers/" + encodeURIComponent(id) + "/" : "/api/teacher/offers/");
       var method = id ? "PATCH" : "POST";
       var body = id
         ? JSON.stringify({ subject: subject, subjectBadge: subjectBadge, rate: rate, location: location, description: description })
@@ -257,7 +257,7 @@
 
       fetch(url, {
         method: method,
-        credentials: "same-origin",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: body,
       })

@@ -50,7 +50,7 @@
     var emptyEl = document.getElementById("conversations-empty");
     var withParam = new URLSearchParams(window.location.search).get("with");
 
-    fetch("/api/chat/conversations" + (withParam ? "?with=" + encodeURIComponent(withParam) : ""), { credentials: "same-origin" })
+    fetch((window.API_BASE || '') + "/api/chat/conversations/" + (withParam ? "?with=" + encodeURIComponent(withParam) : ""), { credentials: "include" })
       .then(function (r) {
         if (r.status === 401) {
           window.location.href = "/login.html?redirect=" + encodeURIComponent(window.location.pathname + window.location.search);
@@ -102,7 +102,7 @@
 
   function loadMessages(userId) {
     if (!userId) return;
-    fetch("/api/chat/messages?with=" + encodeURIComponent(userId), { credentials: "same-origin" })
+    fetch((window.API_BASE || '') + "/api/chat/messages/?with=" + encodeURIComponent(userId), { credentials: "include" })
       .then(function (r) {
         if (r.status === 401) {
           window.location.href = "/login.html?redirect=" + encodeURIComponent(window.location.pathname + window.location.search);
@@ -185,9 +185,9 @@
       return;
     }
 
-    fetch("/api/chat/send", {
+    fetch((window.API_BASE || '') + "/api/chat/send/", {
       method: "POST",
-      credentials: "same-origin",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ toUserId: currentContactId, text: text }),
     })

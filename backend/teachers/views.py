@@ -156,10 +156,9 @@ class OfferDetailView(APIView):
 
         return Response({
             "id": str(offer.pk),
-            "title": offer.subject,
+            "subject": offer.subject,
             "subjectBadge": offer.subject_badge,
-            "rate": f"Rs. {offer.rate:,.0f}/hour",
-            "rateRaw": float(offer.rate),
+            "rate": float(offer.rate),
             "location": offer.location,
             "description": offer.description,
             "status": offer.status,
@@ -179,10 +178,10 @@ class ConnectionDetailView(APIView):
         if action == "accept":
             conn.status = "active"
             conn.save()
+            return Response({"success": True, "status": "active"})
         elif action == "decline":
-            conn.status = "rejected"
+            conn.status = "declined"
             conn.save()
+            return Response({"success": True, "status": "declined"})
         else:
-            return Response({"error": "action must be accept or decline"}, status=status.HTTP_400_BAD_REQUEST)
-
-        return Response({"success": True})
+            return Response({"error": "action must be 'accept' or 'decline'"}, status=status.HTTP_400_BAD_REQUEST)

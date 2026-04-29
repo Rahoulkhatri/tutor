@@ -23,6 +23,7 @@ class Connection(models.Model):
     STATUS_CHOICES = (
         ("pending", "Pending"),
         ("active", "Active"),
+        ("declined", "Declined"),
         ("rejected", "Rejected"),
     )
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name="student_connections")

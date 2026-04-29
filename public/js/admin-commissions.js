@@ -34,4 +34,11 @@ function viewDetails() {
     alert('Viewing detailed refund information and proof');
 }
 
+document.getElementById('commissions-logout')?.addEventListener('click', function (e) {
+    e.preventDefault();
+    fetch((window.API_BASE || '') + '/api/auth/logout/', { method: 'POST', credentials: 'include' })
+        .then(function () { window.location.href = '/login.html'; })
+        .catch(function () { window.location.href = '/login.html'; });
+});
+
 console.log('Admin commission management loaded');

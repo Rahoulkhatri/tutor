@@ -5,7 +5,7 @@
 (function() {
   async function checkAuth() {
     try {
-      const res = await fetch('/api/auth/me', { credentials: 'same-origin' });
+      const res = await fetch((window.API_BASE || '') + '/api/auth/me/', { credentials: 'include' });
       if (res.status === 401) {
         window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);
         return;
@@ -34,7 +34,7 @@
     document.querySelectorAll('.app-shell-logout').forEach(function(link) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' })
+        fetch((window.API_BASE || '') + '/api/auth/logout/', { method: 'POST', credentials: 'include' })
           .then(function() { window.location.href = '/login.html'; })
           .catch(function() { window.location.href = '/login.html'; });
       });

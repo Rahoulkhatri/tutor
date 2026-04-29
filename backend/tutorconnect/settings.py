@@ -1,7 +1,13 @@
 import os
 from pathlib import Path
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+# Load .env from project root (parent of backend/) so DATABASE_URL is available
+_env_file = BASE_DIR.parent / ".env"
+if _env_file.exists():
+    from dotenv import load_dotenv
+    load_dotenv(_env_file)
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "tutorconnect-dev-secret-change-in-production")
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
@@ -52,12 +58,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "tutorconnect.wsgi.application"
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+# PostgreSQL from env (DATABASE_URL or POSTGRES_URL), else SQLite
+_default_db = {
+    "ENGINE": "django.db.backends.sqlite3",
+    "NAME": BASE_DIR / "db.sqlite3",
 }
+_db_url = os.environ.get("DATABASE_URL") or os.environ.get("POSTGRES_URL")
+if _db_url:
+    DATABASES = {"default": dj_database_url.config(default=_db_url, conn_max_age=600)}
+else:
+    DATABASES = {"default": _default_db}
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -77,7 +87,7 @@ AUTH_USER_MODEL = "core.User"
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
+        "core.auth.CsrfExemptSessionAuthentication",
     ],
 }
 

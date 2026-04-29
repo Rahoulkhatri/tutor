@@ -130,15 +130,29 @@ class RequestConnectionView(APIView):
             return Response({"error": "Unauthorized"}, status=status.HTTP_401_UNAUTHORIZED)
 
         offer_id = request.data.get("offerId")
-        if not offer_id:
+        if offer_id is None or offer_id == "":
             return Response({"error": "offerId required"}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            offer_id = int(offer_id)
+        except (TypeError, ValueError):
+            return Response({"error": "Invalid offerId"}, status=status.HTTP_400_BAD_REQUEST)
 
         offer = get_object_or_404(TeachingOffer, pk=offer_id, status="active")
         student = request.user
         teacher = offer.teacher
 
-        if Connection.objects.filter(student=student, teacher=teacher).exists():
-            return Response({"error": "Already connected or request sent"}, status=status.HTTP_400_BAD_REQUEST)
+        existing = Connection.objects.filter(student=student, teacher=teacher).first()
+        if existing:
+            if existing.status == "active":
+                return Response(
+                    {"error": "You are already connected with this teacher", "alreadyConnected": True},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            if existing.status == "pending":
+                return Response(
+                    {"error": "Request already sent", "alreadyPending": True},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
 
         Connection.objects.create(
             student=student,
@@ -148,7 +162,10 @@ class RequestConnectionView(APIView):
             rate=offer.rate,
             status="pending",
         )
-        return Response({"success": True})
+        return Response({
+            "success": True,
+            "message": "Request sent. Teacher will respond shortly.",
+        })
 
 
 class SessionsView(APIView):
@@ -179,6 +196,16 @@ class SessionsView(APIView):
             )
 
         teacher = get_object_or_404(User, pk=teacher_id, role="teacher")
+        # Require active connection before scheduling (same as Node flow)
+        conn = Connection.objects.filter(
+            student=request.user, teacher=teacher, status="active"
+        ).first()
+        if not conn:
+            return Response(
+                {"error": "You need to be connected with this teacher before scheduling. Send a request from Search or Dashboard first."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
         try:
             from datetime import datetime
             scheduled_at = datetime.fromisoformat(start_time.replace("Z", "+00:00"))
@@ -195,6 +222,13 @@ class SessionsView(APIView):
             amount = Decimal(str(amount))
         except Exception:
             amount = Decimal(0)
+        if amount <= 0:
+            rate = conn.rate
+            if not rate:
+                offer = TeachingOffer.objects.filter(teacher=teacher, status="active").first()
+                rate = offer.rate if offer else Decimal(0)
+            if rate:
+                amount = Decimal(str(rate)) * Decimal(str(duration))
 
         session = Session.objects.create(
             student=request.user,
